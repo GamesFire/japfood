@@ -9,6 +9,13 @@
   display: block;
   color: var(--color-dark);
   text-decoration: none;
+  transition: color .3s ease-in-out, outline .3s ease-in-out;
+}
+
+.menu>.link:hover {
+  color: var(--color-imayoh);
+  outline: solid 1px var(--color-imayoh);
+  outline-offset: 4px;
 }
 
 .dropdownContainer {
