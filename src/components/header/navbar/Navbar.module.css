@@ -1,0 +1,116 @@
+.menu {
+  display: flex;
+  column-gap: 80px;
+  align-items: center;
+  font-family: 'Noto Sans Medium', sans-serif;
+}
+
+.link {
+  display: block;
+  color: var(--color-dark);
+  text-decoration: none;
+}
+
+.dropdownContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.button {
+  width: 100%;
+  padding-block: 20px;
+  padding-inline: 32px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.buttonText {
+  font-family: 'Noto Sans Medium', sans-serif;
+  font-size: 16px;
+  color: var(--color-dark);
+  margin-right: 8px;
+}
+
+.arrowDown,
+.arrowUp {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.arrowDown {
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.arrowUp {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.dropdownContent {
+  position: absolute;
+  left: 0;
+  z-index: 1;
+  min-width: 160px;
+  overflow: auto;
+  padding-block: 4px;
+  background-color: var(--color-white);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.categoryOption {
+  cursor: pointer;
+  transition: background-color .3s ease-in-out;
+}
+
+.categoryOption:not(:last-child) {
+  margin-bottom: 4px;
+}
+
+.categoryOption:hover {
+  background-color: var(--color-imayoh);
+}
+
+.categoryOption .link {
+  display: flex;
+  padding-left: 20px;
+  align-items: center;
+}
+
+.iconContainer {
+  position: absolute;
+  right: 20px;
+  display: block;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+
+/* Dropdown enter transition */
+.dropdownEnter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.dropdownEnterActive {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Dropdown exit transition */
+.dropdownExit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdownExitActive {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 300ms, transform 300ms;
+}

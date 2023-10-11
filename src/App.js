@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/pages/Layout";
+import HomePage from "./components/pages/Home";
+import SushiPage from "./components/pages/Categories/Sushi";
+import SoupsPage from "./components/pages/Categories/Soups";
+import DessertsPage from "./components/pages/Categories/Desserts";
+import DrinksPage from "./components/pages/Categories/Drinks";
+import HelpPage from "./components/pages/Help";
+import NoPage from "./components/pages/NoPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="category-sushi" element={<SushiPage />} />
+          <Route path="category-soups" element={<SoupsPage />} />
+          <Route path="category-desserts" element={<DessertsPage />} />
+          <Route path="category-drinks" element={<DrinksPage />} />
+          <Route path="help" element={<HelpPage />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </>
   );
 }
 
