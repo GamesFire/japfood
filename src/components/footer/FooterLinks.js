@@ -1,16 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import styles from "./Footer.module.css";
 
 const FooterLinks = () => {
   return (
-    <div>
-      <ul>
-        <li>
-          <a href="/">Політика конфіденційності</a>
-        </li>
-        <li>
-          <a href="/">Умови та положення</a>
-        </li>
-      </ul>
+    <div className={styles.footerLinks}>
+      <Link to="/privacy-policy" className={styles.link}>
+        Політика конфіденційності
+      </Link>
+      <Link to="/terms-and-conditions" className={styles.link}>
+        Умови та положення
+      </Link>
     </div>
   );
 };

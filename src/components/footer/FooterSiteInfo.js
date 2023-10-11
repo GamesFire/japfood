@@ -1,12 +1,13 @@
 import React from "react";
+import styles from "./Footer.module.css";
 import Logo from "../logo/Logo";
 
 const FooterSiteInfo = () => {
   return (
-    <>
+    <div className={styles.footerSiteInfo}>
       <Logo />
-      <p>Інтернет-каталог японської кухні</p>
-    </>
+      <span className={styles.text}>Інтернет-каталог японської кухні</span>
+    </div>
   );
 };
 
