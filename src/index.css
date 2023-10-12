@@ -18,3 +18,28 @@ a {
   color: var(--color-dark);
   text-decoration: none;
 }
+
+section {
+  margin-bottom: 120px;
+}
+
+.title {
+  display: block;
+  max-width: 800px;
+  font-family: 'Roboto Header', sans-serif;
+  font-size: 56px;
+  line-height: 1.2;
+  color: var(--color-white);
+  text-align: center;
+  margin: 0;
+}
+
+.subtitle {
+  font-family: 'Roboto Header', sans-serif;
+  font-size: 40px;
+  line-height: 1.4;
+  color: var(--color-dark);
+  text-align: center;
+  margin-block-start: 0;
+  margin-block-end: 72px;
+}

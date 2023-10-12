@@ -12,7 +12,8 @@
   transition: color .3s ease-in-out, outline .3s ease-in-out;
 }
 
-.menu>.link:hover {
+.menu>.link:hover,
+.menu>.link.active {
   color: var(--color-imayoh);
   outline: solid 1px var(--color-imayoh);
   outline-offset: 4px;
@@ -76,7 +77,8 @@
   margin-bottom: 4px;
 }
 
-.categoryOption:hover {
+.categoryOption:hover,
+.categoryOption.active {
   background-color: var(--color-imayoh);
 }
 
