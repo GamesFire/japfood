@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./PopularFood.module.css";
 import Container from "../../../../container/Container";
 import FoodCard from "./foodCard/FoodCard";
@@ -9,6 +10,12 @@ import dango from "../../../../../assets/images/categories/desserts/dango.jpg";
 import matcha from "../../../../../assets/images/categories/drinks/matcha.jpg";
 
 const PopularFood = () => {
+  const navigate = useNavigate();
+
+  const handleCategoryClick = (category) => {
+    navigate(`/category-${category}`);
+  };
+
   const popularFood = {
     sushi: {
       name: "Магуро (тунець: нігірі)",
@@ -33,7 +40,7 @@ const PopularFood = () => {
   };
 
   return (
-    <section className={styles.popularFood}>
+    <section className={`section ${styles.popularFood}`}>
       <Container>
         <h2 className="subtitle">Найпопулярніші з кожної категорії</h2>
         <div className={styles.foodCards}>
@@ -41,21 +48,25 @@ const PopularFood = () => {
             picture={maguro}
             name={popularFood.sushi.name}
             description={popularFood.sushi.description}
+            onClick={() => handleCategoryClick("sushi")}
           />
           <FoodCard
             picture={ramen}
             name={popularFood.soups.name}
             description={popularFood.soups.description}
+            onClick={() => handleCategoryClick("soups")}
           />
           <FoodCard
             picture={dango}
             name={popularFood.desserts.name}
             description={popularFood.desserts.description}
+            onClick={() => handleCategoryClick("desserts")}
           />
           <FoodCard
             picture={matcha}
             name={popularFood.drinks.name}
             description={popularFood.drinks.description}
+            onClick={() => handleCategoryClick("drinks")}
           />
         </div>
       </Container>

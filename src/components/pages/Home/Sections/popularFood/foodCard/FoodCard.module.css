@@ -54,6 +54,11 @@
   border-radius: 10px;
   outline: none;
   cursor: pointer;
+  transition: background-color .3s ease-in-out;
+}
+
+.button:hover {
+  background-color: #954A45;
 }
 
 .buttonText {

@@ -11,7 +11,7 @@ const FoodCard = (props) => {
         <h3 className={styles.name}>{props.name}</h3>
         <p className={styles.description}>{props.description}</p>
       </div>
-      <button className={styles.button}>
+      <button className={styles.button} onClick={props.onClick}>
         <span className={styles.buttonText}>Дізнатись більше</span>
       </button>
     </div>

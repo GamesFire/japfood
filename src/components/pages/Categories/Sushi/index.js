@@ -1,10 +1,18 @@
 import React from "react";
+import Container from "../../../container/Container";
+import FilterPanel from "./filterPanel/FilterPanel";
+import SushiList from "./SushiList";
 
 const SushiPage = () => {
   return (
-    <>
-      <h1>Sushi page</h1>
-    </>
+    <main>
+      <section className="section">
+        <Container>
+          <FilterPanel />
+          <SushiList />
+        </Container>
+      </section>
+    </main>
   );
 };
 

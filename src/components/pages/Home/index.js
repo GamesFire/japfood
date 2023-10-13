@@ -4,10 +4,10 @@ import PopularFood from "./Sections/popularFood/PopularFood";
 
 const HomePage = () => {
   return (
-    <>
+    <main>
       <Hero />
       <PopularFood />
-    </>
+    </main>
   );
 };
 

@@ -4,7 +4,7 @@ import Container from "../../../../container/Container";
 
 const Hero = () => {
   return (
-    <section className={styles.hero}>
+    <section className={`section ${styles.hero}`}>
       <Container>
         <h1 className="title">Відкрийте для себе мистецтво японських страв</h1>
       </Container>

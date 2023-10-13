@@ -1,0 +1,7 @@
+.filterPanel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block-start: 100px;
+  margin-block-end: 72px;
+}
