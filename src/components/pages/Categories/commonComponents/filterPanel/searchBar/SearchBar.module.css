@@ -1,9 +1,17 @@
 .searchContainer {
   display: flex;
   width: 600px;
-  border: solid 1px #D05A6E;
+  border: solid 1px var(--color-imayoh);
   border-radius: 20px;
   overflow: hidden;
+}
+
+.searchContainer:hover:not(.active) {
+  border-color: #212121;
+}
+
+.active {
+  border: solid 2px var(--color-blue);
 }
 
 .searchInput {
@@ -21,22 +29,22 @@
 }
 
 .searchInput::placeholder {
-  color: #656765;
+  color: var(--color-nibi);
 }
 
 /* Internet Explorer 10-11 */
 .searchInput:-ms-input-placeholder {
-  color: #656765;
+  color: var(--color-nibi);
 }
 
 /* Microsoft Edge */
 .searchInput::-ms-input-placeholder {
-  color: #656765;
+  color: var(--color-nibi);
 }
 
 .searchButton {
   display: block;
-  background-color: #D05A6E;
+  background-color: var(--color-imayoh);
   border: none;
   outline: none;
   margin: 0;
@@ -49,7 +57,7 @@
 }
 
 .searchButton:hover {
-  background-color: #954A45;
+  background-color: var(--color-azuki);
 }
 
 .iconContainer {

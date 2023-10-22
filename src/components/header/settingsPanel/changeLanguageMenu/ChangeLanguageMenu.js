@@ -30,7 +30,7 @@ const ChangeLanguageMenu = () => {
       onMouseLeave={handleMenuClose}
     >
       <button className={styles.languageButton}>
-        <span className={styles.languageButtonText}>Виберіть мову</span>
+        <span className={styles.languageButtonText}>Оберіть мову</span>
         <FontAwesomeIcon
           icon={faCaretDown}
           className={isMenuOpen ? styles.arrowUp : styles.arrowDown}

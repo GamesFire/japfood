@@ -1,0 +1,18 @@
+.mainText {
+  margin-bottom: 78px;
+}
+
+.title {
+  color: var(--color-dark);
+  margin-block: 100px;
+  margin-inline: auto;
+}
+
+.subtitle {
+  margin-block-end: 28px;
+}
+
+.text {
+  text-align: center;
+  margin-block: 0;
+}

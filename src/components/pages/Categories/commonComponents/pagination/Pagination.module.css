@@ -1,0 +1,42 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 92px;
+}
+
+.pageList {
+  display: flex;
+}
+
+.pageItem,
+.outOfRange {
+  padding-block: 8px;
+  padding-inline: 12px;
+  border: 1px solid var(--color-imayoh);
+  background-color: var(--color-momo);
+  cursor: pointer;
+  user-select: none;
+  transition: background-color .3s, color .3s;
+}
+
+.pageItem:hover:not(.active),
+.outOfRange:hover,
+.previous:hover,
+.next:hover {
+  background-color: var(--color-jinzamomi);
+}
+
+.active {
+  background-color: var(--color-hiwamoegi);
+}
+
+.next {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.previous {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}

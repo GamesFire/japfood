@@ -1,0 +1,54 @@
+.FAQ {
+  width: 48%;
+}
+
+.subtitle {
+  margin-block-end: 28px;
+}
+
+.questionList {
+  display: flex;
+  flex-direction: column;
+  row-gap: 52px;
+  width: 100%;
+}
+
+.questionCard {
+  background-color: var(--color-imayoh);
+  border-radius: 20px;
+  padding-block: 16px;
+  padding-inline: 20px;
+}
+
+.question {
+  font-family: 'Noto Sans Medium', sans-serif;
+  font-size: 24px;
+  vertical-align: middle;
+}
+
+.icon {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  vertical-align: middle;
+  border: solid 1px var(--color-dark);
+  border-radius: 50%;
+  margin-right: 16px;
+  cursor: pointer;
+}
+
+.icon:hover {
+  background-color: var(--color-entan);
+}
+
+.answer {
+  max-height: 0;
+  overflow: hidden;
+}
+
+.answer.active {
+  max-height: 1000px;
+  margin-top: 30px;
+  transition: max-height 1s linear;
+}

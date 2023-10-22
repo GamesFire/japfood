@@ -1,6 +1,7 @@
 .container {
   width: 150px;
   height: auto;
+  user-select: none;
 }
 
 .link {

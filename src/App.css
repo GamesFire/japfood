@@ -1,8 +1,16 @@
 :root {
-  --color-white: #fff;
+  /* Colors taken from the nipponcolors.com */
+  --color-white: #ffffff;
   --color-dark: #080808;
+  --color-blue: #1976d2;
   --color-imayoh: #D05A6E;
   --color-jinzamomi: #EB7A77;
+  --color-shironezumi: #BDC0BA;
+  --color-azuki: #954A45;
+  --color-nibi: #656765;
+  --color-entan: #D75455;
+  --color-momo: #F596AA;
+  --color-hiwamoegi: #90B44B;
 }
 
 @font-face {

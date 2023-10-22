@@ -3,6 +3,7 @@
   column-gap: 80px;
   align-items: center;
   font-family: 'Noto Sans Medium', sans-serif;
+  user-select: none;
 }
 
 .link {

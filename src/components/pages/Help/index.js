@@ -1,10 +1,13 @@
 import React from "react";
+import MainText from "./Sections/mainText/MainText";
+import Support from "./Sections/support/Support";
 
 const HelpPage = () => {
   return (
-    <>
-      <h1>Help page</h1>
-    </>
+    <main>
+      <MainText />
+      <Support />
+    </main>
   );
 };
 
