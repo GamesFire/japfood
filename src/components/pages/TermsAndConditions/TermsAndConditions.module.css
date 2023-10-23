@@ -1,0 +1,50 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  user-select: none;
+}
+
+.title {
+  color: var(--color-dark);
+  margin-bottom: 60px;
+  margin-inline: auto;
+}
+
+.text {
+  margin-block: 0;
+}
+
+.text:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+.text:last-child {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 24px;
+  text-align: left;
+  margin-block-start: 40px;
+  margin-block-end: 20px;
+}
+
+.list {
+  list-style-type: circle;
+  list-style-position: inside;
+  margin-bottom: 20px;
+}
+
+.listItem:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.link {
+  color: var(--color-blue);
+}
+
+.link:hover {
+  text-decoration: underline;
+}

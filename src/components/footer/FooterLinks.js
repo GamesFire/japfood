@@ -6,10 +6,10 @@ const FooterLinks = () => {
   return (
     <div className={styles.footerLinks}>
       <Link to="/privacy-policy" className={styles.link}>
-        Політика конфіденційності
+        Політика Конфіденційності
       </Link>
       <Link to="/terms-and-conditions" className={styles.link}>
-        Умови та положення
+        Умови та Положення
       </Link>
     </div>
   );

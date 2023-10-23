@@ -1,20 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./index.css";
+import styles from "./index.module.css";
+import Container from "../../container/Container";
 
 const NoPage = () => {
   return (
-    <div className="container">
-      <div className="content">
-        <h1 className="heading">404 - Not Found</h1>
-        <p className="text">
-          The page you are looking for might be in another castle.
-        </p>
-        <Link to="/" className="link">
-          Go back to Home
-        </Link>
-      </div>
-    </div>
+    <main>
+      <section className={`section ${styles.noPage}`}>
+        <Container>
+          <div className={styles.content}>
+            <h1 className={`title ${styles.title}`}>404 - Не знайдено</h1>
+            <p className={styles.text}>
+              Сторінка, яку ви шукаєте, може бути в іншому місті.
+            </p>
+            <Link to="/" className={styles.link}>
+              Повернутися на головну сторінку
+            </Link>
+          </div>
+        </Container>
+      </section>
+    </main>
   );
 };
 

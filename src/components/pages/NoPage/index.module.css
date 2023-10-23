@@ -1,0 +1,29 @@
+.noPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.content {
+  text-align: center;
+}
+
+.title {
+  color: var(--color-imayoh);
+  margin-bottom: 32px;
+}
+
+.text {
+  font-family: 'Noto Sans Medium', sans-serif;
+  font-size: 20px;
+  margin-block-start: 0;
+  margin-block-end: 20px;
+}
+
+.link {
+  font-family: 'Noto Sans Medium', sans-serif;
+  font-size: 20px;
+  color: var(--color-blue);
+  text-decoration: underline;
+}
