@@ -28,7 +28,7 @@
 }
 
 .active {
-  background-color: var(--color-hiwamoegi);
+  background-color: var(--active-pagination);
 }
 
 .next {

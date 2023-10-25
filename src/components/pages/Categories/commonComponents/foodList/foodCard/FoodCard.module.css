@@ -9,7 +9,7 @@
   transform-origin: top center;
   transform-style: preserve-3d;
   transition: transform .6s, box-shadow .3s;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 2px -2px rgba(0, 0, 0, 0.1);
 }
 
 .foodCard:hover {
@@ -48,7 +48,7 @@
 }
 
 .front {
-  background-color: var(--color-white);
+  background-color: var(--bg-primary);
 }
 
 .back {
@@ -79,7 +79,7 @@
   font-family: 'Noto Sans Medium', sans-serif;
   font-size: 20px;
   line-height: 1.5;
-  color: var(--color-dark);
+  color: var(--text-primary);
   text-align: center;
   margin-block-start: 0;
   margin-block-end: 16px;

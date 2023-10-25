@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import "./App.css";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Layout from "./components/pages/Layout";
@@ -11,8 +11,10 @@ import HelpPage from "./components/pages/Help";
 import PrivacyPolicy from "./components/pages/PrivacyPolicy/PrivacyPolicy";
 import TermsAndConditions from "./components/pages/TermsAndConditions/TermsAndConditions";
 import NoPage from "./components/pages/NoPage";
+import { ThemeContext } from "./Theme";
 
 function App() {
+  const { theme } = useContext(ThemeContext);
   const location = useLocation();
 
   useEffect(() => {
@@ -24,7 +26,7 @@ function App() {
   }, [location]);
 
   return (
-    <>
+    <div className={`App ${theme}`}>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
@@ -38,7 +40,7 @@ function App() {
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>
-    </>
+    </div>
   );
 }
 

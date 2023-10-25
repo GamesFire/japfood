@@ -1,3 +1,4 @@
 .themeToggle {
   cursor: pointer;
+  user-select: none;
 }

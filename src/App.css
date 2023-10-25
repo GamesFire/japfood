@@ -6,11 +6,41 @@
   --color-imayoh: #D05A6E;
   --color-jinzamomi: #EB7A77;
   --color-shironezumi: #BDC0BA;
+  --color-kurobeni: #3F2B36;
+  --color-usubeni: #E87A90;
+  --color-shinsyu: #AB3B3A;
   --color-azuki: #954A45;
   --color-nibi: #656765;
   --color-entan: #D75455;
   --color-momo: #F596AA;
   --color-hiwamoegi: #90B44B;
+  --color-kimirucha: #867835;
+
+  --text-primary-light: var(--color-white);
+  --text-primary-dark: var(--color-dark);
+
+  --bg-primary-light: var(--color-white);
+  --bg-primary-dark: var(--color-kurobeni);
+
+  --bg-footer-light: var(--color-jinzamomi);
+  --bg-footer-dark: var(--color-shinsyu);
+
+  --active-pagination-light: var(--color-hiwamoegi);
+  --active-pagination-dark: var(--color-kimirucha);
+}
+
+.light-theme {
+  --text-primary: var(--text-primary-dark);
+  --bg-primary: var(--bg-primary-light);
+  --bg-footer: var(--bg-footer-light);
+  --active-pagination: var(--active-pagination-light);
+}
+
+.dark-theme {
+  --text-primary: var(--text-primary-light);
+  --bg-primary: var(--bg-primary-dark);
+  --bg-footer: var(--bg-footer-dark);
+  --active-pagination: var(--active-pagination-dark);
 }
 
 @font-face {

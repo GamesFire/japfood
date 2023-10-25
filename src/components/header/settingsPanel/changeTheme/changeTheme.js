@@ -1,20 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 import styles from "./ChangeTheme.module.css";
+import { ThemeContext } from "../../../../Theme";
 
 const ChangeTheme = () => {
-  const [isDarkMode, setDarkMode] = useState(false);
-
-  const toggleDarkMode = (checked) => {
-    setDarkMode(checked);
-    document.body.classList.add(styles.darkTheme);
-  };
+  const { toggleTheme, isDarkTheme } = useContext(ThemeContext);
 
   return (
     <div className={styles.themeToggle}>
       <DarkModeSwitch
-        checked={isDarkMode}
-        onChange={toggleDarkMode}
+        checked={isDarkTheme}
+        onChange={() => toggleTheme()}
         size={30}
         speed={1}
       />

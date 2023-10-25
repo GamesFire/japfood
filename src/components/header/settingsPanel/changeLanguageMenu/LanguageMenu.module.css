@@ -12,12 +12,13 @@
   border: none;
   outline: none;
   cursor: pointer;
+  background-color: var(--bg-primary);
 }
 
 .languageButtonText {
   font-family: 'Noto Sans Medium', sans-serif;
   font-size: 16px;
-  color: var(--color-dark);
+  color: var(--text-primary);
   margin-right: 8px;
 }
 
@@ -26,6 +27,7 @@
   position: absolute;
   right: 16px;
   top: 50%;
+  color: var(--text-primary);
   transform: translateY(-50%);
   transition: transform 0.3s ease-in-out;
 }
@@ -45,7 +47,7 @@
   min-width: 180px;
   overflow: auto;
   padding-block: 4px;
-  background-color: var(--color-white);
+  background-color: var(--bg-primary);
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 

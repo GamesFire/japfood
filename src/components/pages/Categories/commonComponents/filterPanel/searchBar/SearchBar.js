@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./SearchBar.module.css";
-import Loupe from "../../../../../../assets/images/icons/loupe.svg";
+import { ThemeContext } from "../../../../../../Theme";
+
+import LoupeDark from "../../../../../../assets/images/icons/dark/loupe-dark.svg";
+import LoupeLight from "../../../../../../assets/images/icons/light/loupe-light.svg";
 
 const SearchBar = () => {
+  const { isDarkTheme } = useContext(ThemeContext);
   const [isInputFocused, setIsInputFocused] = useState(false);
 
   const handleFocus = () => {
@@ -29,7 +33,11 @@ const SearchBar = () => {
       />
       <button type="button" className={styles.searchButton}>
         <span className={styles.iconContainer}>
-          <img src={Loupe} alt={`${Loupe} Icon`} className={styles.icon} />
+          <img
+            src={isDarkTheme ? LoupeLight : LoupeDark}
+            alt={`${isDarkTheme ? LoupeLight : LoupeDark} Icon`}
+            className={styles.icon}
+          />
         </span>
         <span className={styles.searchButtonText}>Пошук</span>
       </button>

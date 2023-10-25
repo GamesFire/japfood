@@ -19,7 +19,8 @@
   font-family: 'Noto Sans Medium', sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  color: var(--color-dark);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
   padding-block: 10px;
   padding-inline-start: 32px;
   padding-inline-end: 12px;
@@ -75,5 +76,5 @@
   font-family: 'Noto Sans Medium', sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  color: var(--color-dark);
+  color: var(--text-primary);
 }

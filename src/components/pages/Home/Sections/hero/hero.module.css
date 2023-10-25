@@ -13,3 +13,7 @@
   background-position: center center;
   box-shadow: inset 0 0 0 1000px rgba(46, 47, 66, 0.70);
 }
+
+.heroTitle {
+  color: var(--color-white);
+}

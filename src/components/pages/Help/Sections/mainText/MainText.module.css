@@ -3,7 +3,6 @@
 }
 
 .title {
-  color: var(--color-dark);
   margin-block: 100px;
   margin-inline: auto;
 }

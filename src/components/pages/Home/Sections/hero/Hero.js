@@ -6,7 +6,9 @@ const Hero = () => {
   return (
     <section className={`section ${styles.hero}`}>
       <Container>
-        <h1 className="title">Відкрийте для себе мистецтво японських страв</h1>
+        <h1 className={`title ${styles.heroTitle}`}>
+          Відкрийте для себе мистецтво японських страв
+        </h1>
       </Container>
     </section>
   );

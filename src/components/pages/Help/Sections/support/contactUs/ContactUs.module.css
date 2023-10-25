@@ -8,6 +8,7 @@
 
 .text {
   text-align: center;
+  margin: 0;
   margin-bottom: 52px;
 }
 
@@ -42,6 +43,7 @@
   width: 100%;
   font-family: 'Noto Sans Regular', sans-serif;
   font-size: 20px;
+  color: var(--text-primary);
   background-color: var(--color-momo);
   border: none;
   border-bottom: 1px solid var(--color-azuki);
@@ -87,7 +89,7 @@
   font-family: 'Noto Sans Medium', sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  color: var(--color-dark);
+  color: var(--text-primary);
   background-color: var(--color-imayoh);
   margin-left: 54px;
   margin-bottom: 32px;
