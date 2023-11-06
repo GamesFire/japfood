@@ -1,4 +1,6 @@
 html {
+  font-size: 16px;
+  line-height: 1.5;
   box-sizing: border-box;
 }
 
@@ -10,8 +12,6 @@ html {
 
 body {
   font-family: 'Noto Sans Regular', sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
   color: var(--text-primary);
   margin: 0;
   padding: 0;
@@ -57,4 +57,38 @@ a {
   text-align: center;
   margin-block-start: 0;
   margin-block-end: 72px;
+}
+
+@media screen and (min-width: 2000px) {
+  html {
+    font-size: 32px;
+    line-height: 1.4;
+  }
+
+  .title {
+    max-width: 1600px;
+    font-size: 72px;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-size: 56px;
+    line-height: 1.2;
+  }
+}
+
+@media screen and (max-width: 1439px) {
+  .section {
+    margin-bottom: 80px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .title {
+    font-size: 36px;
+  }
+
+  .subtitle {
+    font-size: 28px;
+  }
 }

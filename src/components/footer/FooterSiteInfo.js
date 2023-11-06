@@ -5,7 +5,7 @@ import Logo from "../logo/Logo";
 const FooterSiteInfo = () => {
   return (
     <div className={styles.footerSiteInfo}>
-      <Logo />
+      <Logo location="footer" />
       <span className={styles.text}>Інтернет-каталог японської кухні</span>
     </div>
   );

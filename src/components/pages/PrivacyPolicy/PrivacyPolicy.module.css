@@ -47,3 +47,28 @@
 .link:hover {
   text-decoration: underline;
 }
+
+@media screen and (min-width: 2000px) {
+  .title {
+    max-width: 1600px;
+    font-size: 72px;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-size: 44px;
+    line-height: 1.2;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .title {
+    max-width: 100%;
+  }
+
+  @media screen and (max-width: 375px) {
+    .title {
+      font-size: 32px;
+    }
+  }
+}

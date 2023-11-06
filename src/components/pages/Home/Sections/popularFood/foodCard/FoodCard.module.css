@@ -22,9 +22,9 @@
 }
 
 .contentBlock {
-  padding-block-start: 20px;
-  padding-block-end: 28px;
-  padding-inline: 12px;
+  margin-block-start: 20px;
+  margin-block-end: 28px;
+  margin-inline: 12px;
 }
 
 .name {
@@ -38,10 +38,14 @@
 }
 
 .description {
+  width: 100%;
+  height: 100px;
   font-family: 'Noto Sans Regular', sans-serif;
   font-size: 16px;
   line-height: 1.5;
   color: var(--text-primary);
+  word-wrap: break-word;
+  text-overflow: ellipsis;
   margin: 0;
 }
 
@@ -69,4 +73,44 @@
   line-height: 1.5;
   color: var(--color-white);
   text-align: center;
+}
+
+@media screen and (min-width: 2000px) {
+  .container {
+    height: 940px;
+  }
+
+  .pictureBlock {
+    height: 335px;
+  }
+
+  .contentBlock {
+    padding-block-start: 40px;
+    padding-block-end: 48px;
+    padding-inline: 24px;
+  }
+
+  .name {
+    font-size: 36px;
+    line-height: 1.4;
+    margin-block-end: 36px;
+  }
+
+  .description {
+    height: 280px;
+    font-size: 32px;
+    line-height: 1.4;
+  }
+}
+
+@media screen and (max-width: 1439px) {
+  .container {
+    width: 48%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    width: 100%;
+  }
 }

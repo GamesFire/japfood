@@ -5,9 +5,10 @@ import { ThemeContext } from "../../../../../../Theme";
 import LoupeDark from "../../../../../../assets/images/icons/dark/loupe-dark.svg";
 import LoupeLight from "../../../../../../assets/images/icons/light/loupe-light.svg";
 
-const SearchBar = () => {
+const SearchBar = ({ onSearch, isSeacrhButtonDisabled }) => {
   const { isDarkTheme } = useContext(ThemeContext);
   const [isInputFocused, setIsInputFocused] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleFocus = () => {
     setIsInputFocused(true);
@@ -15,6 +16,10 @@ const SearchBar = () => {
 
   const handleBlur = () => {
     setIsInputFocused(false);
+  };
+
+  const handleSearch = () => {
+    onSearch(searchQuery);
   };
 
   return (
@@ -30,8 +35,15 @@ const SearchBar = () => {
         className={styles.searchInput}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
       />
-      <button type="button" className={styles.searchButton}>
+      <button
+        type="button"
+        className={styles.searchButton}
+        onClick={handleSearch}
+        disabled={isSeacrhButtonDisabled}
+      >
         <span className={styles.iconContainer}>
           <img
             src={isDarkTheme ? LoupeLight : LoupeDark}

@@ -5,4 +5,31 @@
   justify-items: center;
   row-gap: 48px;
   column-gap: 24px;
+  width: 100%;
+}
+
+.empty {
+  width: auto;
+  height: 100vh;
+}
+
+@media screen and (min-width: 2000px) {
+  .foodList {
+    row-gap: 80px;
+    column-gap: 52px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .foodList {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 16px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .foodList {
+    grid-template-columns: repeat(1, 1fr);
+    column-gap: 0;
+  }
 }

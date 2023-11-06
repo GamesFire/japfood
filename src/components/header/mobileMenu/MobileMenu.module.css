@@ -1,0 +1,50 @@
+.mobileMenu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  z-index: 999;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-primary);
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-block: 24px;
+  padding-inline: 16px;
+  transition: right .3s ease-in-out;
+}
+
+.mobileMenu.open {
+  right: 0;
+}
+
+.closeButton {
+  position: absolute;
+  right: 16px;
+  top: 24px;
+  display: none;
+  width: 30px;
+  height: 30px;
+  font-size: 28px;
+  line-height: 1.4;
+  color: var(--text-primary);
+  text-align: center;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+}
+
+.closeButton svg {
+  vertical-align: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .mobileMenu {
+    display: block;
+  }
+
+  .closeButton {
+    display: block;
+  }
+}

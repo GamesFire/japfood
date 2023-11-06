@@ -15,3 +15,16 @@
   text-align: center;
   margin-block: 0;
 }
+
+@media screen and (max-width: 1439px) {
+  .text {
+    width: 75%;
+    margin-inline: auto;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .text {
+    width: 100%;
+  }
+}

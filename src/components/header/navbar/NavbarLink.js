@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./Navbar.module.css";
 
-const NavbarLink = ({ to, children }) => {
+const NavbarLink = ({ to, children, closeMobileMenu }) => {
   const location = useLocation();
 
   return (
@@ -12,6 +12,7 @@ const NavbarLink = ({ to, children }) => {
       className={`${styles.link} ${
         location.pathname === to ? styles.active : ""
       }`}
+      onClick={closeMobileMenu !== "" ? () => closeMobileMenu() : null}
     >
       {children}
     </Link>

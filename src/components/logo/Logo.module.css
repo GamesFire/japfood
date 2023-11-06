@@ -7,3 +7,38 @@
 .link {
   cursor: pointer;
 }
+
+@media screen and (min-width: 2000px) {
+  .container {
+    width: 300px;
+  }
+
+  .picture {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 1439px) {
+  .headerLogo {
+    width: 100%;
+    text-align: center;
+    margin-top: 12px;
+  }
+
+  .footerLogo {
+    width: auto;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .headerLogo {
+    width: auto;
+    margin-top: 0;
+  }
+
+  .footerLogo {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}

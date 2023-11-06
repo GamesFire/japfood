@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styles from "./FoodCard.module.css";
-import fallbackImage from "../../../../../../assets/images/file-not-found.jpg";
 import { Flipper, Flipped } from "react-flip-toolkit";
 
 const FoodCard = ({
-  category,
   name,
   imageName,
+  image,
   weight,
   averagePrice,
   ingredients,
@@ -17,16 +16,11 @@ const FoodCard = ({
   const [activeSide, setActiveSide] = useState("front");
 
   useEffect(() => {
-    import(
-      `../../../../../../assets/images/categories/${category}/${imageName}.jpg`
-    )
-      .then((imageModule) => {
-        setImageSrc(imageModule.default);
-      })
-      .catch(() => {
-        setImageSrc(fallbackImage);
-      });
-  }, [category, imageName]);
+    if (image) {
+      const decodedImage = `data:image/jpeg;base64,${image}`;
+      setImageSrc(decodedImage);
+    }
+  }, [image]);
 
   const toggleCard = () => {
     setIsFlipped((prev) => !prev);
@@ -44,8 +38,7 @@ const FoodCard = ({
         {averagePrice}$
       </p>
       <p className={styles.ingredients}>
-        <span className={styles.label}>Інгредієнти:</span>{" "}
-        {`${ingredients.join(", ")}.`}
+        <span className={styles.label}>Інгредієнти:</span> {ingredients}
       </p>
     </div>
   );
@@ -63,7 +56,11 @@ const FoodCard = ({
               <Flipped inverseFlipId="card">
                 <div className={`${styles.side} ${styles.front}`}>
                   <div className={styles.imageContainer}>
-                    <img src={imageSrc || fallbackImage} alt={name} />
+                    <img
+                      src={imageSrc}
+                      alt={imageName}
+                      className={styles.image}
+                    />
                   </div>
                   {sharedContent}
                 </div>

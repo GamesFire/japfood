@@ -16,7 +16,11 @@ const SortMenu = () => {
   };
 
   return (
-    <Box sx={{ minWidth: 300 }}>
+    <Box
+      sx={{
+        minWidth: window.innerWidth > 2000 ? 600 : 300,
+      }}
+    >
       <FormControl
         fullWidth
         sx={{
@@ -26,6 +30,7 @@ const SortMenu = () => {
           },
           "& .MuiSelect-select": {
             fontFamily: "'Noto Sans Medium', sans-serif",
+            color: isDarkTheme ? "#ffffff" : "",
           },
           "& .MuiSvgIcon-root": {
             color: "var(--color-nibi)",
@@ -47,15 +52,6 @@ const SortMenu = () => {
           value={option}
           label="Сортування"
           onChange={handleChange}
-          sx={
-            isDarkTheme
-              ? {
-                  "& .MuiSelect-select": {
-                    color: "#ffffff",
-                  },
-                }
-              : ""
-          }
           MenuProps={
             isDarkTheme
               ? {
@@ -68,7 +64,7 @@ const SortMenu = () => {
                     },
                   },
                 }
-              : ""
+              : {}
           }
         >
           <MenuItem value="cheap-expensive" className={styles.item}>

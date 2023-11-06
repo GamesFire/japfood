@@ -17,7 +17,7 @@ import SoupsIconLight from "../../../assets/images/icons/light/soup-light.svg";
 import DessertsIconLight from "../../../assets/images/icons/light/dessert-light.svg";
 import DrinksIconLight from "../../../assets/images/icons/light/drink-light.svg";
 
-const Navbar = () => {
+const Navbar = ({ closeMobileMenu }) => {
   const { isDarkTheme } = useContext(ThemeContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -31,11 +31,14 @@ const Navbar = () => {
 
   const handleCategoryClick = (category) => {
     handleMenuClose();
+    closeMobileMenu();
   };
 
   return (
     <nav className={styles.menu}>
-      <NavbarLink to="/">Головна</NavbarLink>
+      <NavbarLink to="/" closeMobileMenu={closeMobileMenu}>
+        Головна
+      </NavbarLink>
       <div
         className={styles.dropdownContainer}
         onMouseEnter={handleMenuOpen}
@@ -75,7 +78,9 @@ const Navbar = () => {
           />
         </NavbarDropdown>
       </div>
-      <NavbarLink to="/help">Допомога</NavbarLink>
+      <NavbarLink to="/help" closeMobileMenu={closeMobileMenu}>
+        Допомога
+      </NavbarLink>
     </nav>
   );
 };

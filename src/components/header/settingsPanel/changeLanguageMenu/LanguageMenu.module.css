@@ -29,7 +29,7 @@
   top: 50%;
   color: var(--text-primary);
   transform: translateY(-50%);
-  transition: transform 0.3s ease-in-out;
+  transition: transform .3s ease-in-out;
 }
 
 .arrowDown {
@@ -100,4 +100,99 @@
   opacity: 0;
   transform: translateY(-10px);
   transition: opacity 300ms, transform 300ms;
+}
+
+@media screen and (min-width: 2000px) {
+  .languageButton {
+    padding-block: 40px;
+    padding-inline: 52px;
+  }
+
+  @media screen and (min-width: 2000px) {
+    .languageButton {
+      padding-block: 40px;
+      padding-inline: 52px;
+    }
+
+    .languageButtonText {
+      font-size: 32px;
+      line-height: 1.4;
+    }
+
+    .arrowDown,
+    .arrowUp {
+      font-size: 32px;
+      line-height: 1.4;
+    }
+
+    .dropdownContent {
+      min-width: 300px;
+      padding-block: 16px;
+    }
+
+    .languageOption:not(:last-child) {
+      margin-bottom: 12px;
+    }
+
+    .icon {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .languageMenu {
+    position: static;
+    display: block;
+    min-width: 100%;
+    font-size: 32px;
+  }
+
+  .languageButton {
+    position: relative;
+    padding-block: 12px;
+    padding-inline: 0;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  .languageButtonText {
+    font-size: 32px;
+  }
+
+  .arrowDown,
+  .arrowUp {
+    right: 12px;
+    font-size: 32px;
+    vertical-align: middle;
+  }
+
+  .dropdownContent {
+    position: static;
+    left: 0;
+    z-index: 0;
+    min-width: 0;
+  }
+
+  .languageOption {
+    padding-left: 8px;
+  }
+
+  .languageOption:not(:last-child) {
+    margin-bottom: 16px;
+  }
+
+  .iconContainer {
+    position: static;
+    right: 0;
+    width: 35px;
+    margin-inline-start: auto;
+    margin-inline-end: 12px;
+  }
+
+  .icon {
+    width: 35px;
+    height: 35px;
+  }
 }

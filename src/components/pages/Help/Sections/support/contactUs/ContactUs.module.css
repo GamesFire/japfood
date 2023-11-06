@@ -15,7 +15,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  row-gap: 32px;
   width: 100%;
   background-color: var(--color-momo);
   border-radius: 5px;
@@ -25,6 +25,7 @@
   font-family: 'Noto Sans Medium', sans-serif;
   font-size: 24px;
   font-weight: unset;
+  text-align: center;
   margin-block: 32px;
   margin-inline: auto;
 }
@@ -111,4 +112,57 @@
 .submitButton[disabled] {
   background-color: var(--color-nibi);
   cursor: not-allowed;
+}
+
+@media screen and (min-width: 2000px) {
+  .form {
+    row-gap: 52px;
+  }
+
+  .formHeader {
+    font-size: 40px;
+  }
+
+  .name,
+  .email,
+  .subject,
+  .message {
+    font-size: 36px;
+  }
+
+  .label {
+    font-size: 36px;
+  }
+
+  .focused {
+    font-size: 24px;
+  }
+
+  .submitButton {
+    width: 300px;
+    font-size: 36px;
+    line-height: 1.5;
+  }
+}
+
+@media screen and (max-width: 1439px) {
+  .contactUs {
+    width: 75%;
+    margin-inline: auto;
+    margin-bottom: 116px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .contactUs {
+    width: 100%;
+  }
+
+  .formHeader {
+    font-size: 20px;
+  }
+
+  .formGroup {
+    padding-inline: 32px;
+  }
 }

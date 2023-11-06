@@ -2,3 +2,10 @@
   cursor: pointer;
   user-select: none;
 }
+
+@media screen and (max-width: 767px) {
+  .themeToggle {
+    position: absolute;
+    top: 24px;
+  }
+}

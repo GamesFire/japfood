@@ -61,7 +61,7 @@
   overflow: hidden;
 }
 
-.imageContainer img {
+.image {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -117,4 +117,49 @@
 
 .description {
   margin: 0;
+}
+
+@media screen and (min-width: 2000px) {
+  .foodCard {
+    width: 520px;
+    height: 1200px;
+  }
+
+  .imageContainer {
+    width: 520px;
+  }
+
+  @media screen and (min-width: 2300px) {
+    .foodCard {
+      width: 600px;
+    }
+
+    .imageContainer {
+      width: 600px;
+    }
+  }
+
+  .contentContainer {
+    margin-block: 40px;
+    padding-inline: 40px;
+  }
+
+  .name {
+    font-size: 36px;
+    line-height: 1.5;
+    margin-block-end: 32px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  @media screen and (max-width: 425px) {
+    .foodCard {
+      width: 288px;
+      height: 600px;
+    }
+
+    .imageContainer {
+      width: 288px;
+    }
+  }
 }

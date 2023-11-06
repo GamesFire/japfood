@@ -1,23 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import PaginationItem from "./PaginationItem";
 import PaginationEllipsis from "./PaginationEllipsis";
 import styles from "./Pagination.module.css";
 
-const Pagination = ({ totalItems, itemsPerPage, onPageChange }) => {
-  const [currentPage, setCurrentPage] = useState(1);
+const Pagination = ({
+  totalItems,
+  itemsPerPage,
+  currentPage,
+  onPageChange,
+}) => {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  useEffect(() => {
-    onPageChange(currentPage);
-  }, [currentPage, onPageChange]);
+  if (totalPages < 2) {
+    return null;
+  }
 
   const handlePageClick = (page) => {
-    setCurrentPage(page);
+    onPageChange(page);
   };
 
   const handleEllipsisClick = (direction) => {
     if (direction === "previous") {
-      handlePageClick(Math.max(currentPage - 2, 1));
+      handlePageClick(Math.max(currentPage - 2));
     } else if (direction === "next") {
       handlePageClick(Math.min(currentPage + 2, totalPages));
     }

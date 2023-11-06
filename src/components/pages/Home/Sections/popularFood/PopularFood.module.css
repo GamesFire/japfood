@@ -3,3 +3,24 @@
   align-items: center;
   column-gap: 24px;
 }
+
+@media screen and (min-width: 2000px) {
+  .foodCards {
+    column-gap: 52px;
+  }
+}
+
+@media screen and (max-width: 1439px) {
+  .foodCards {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-gap: 0;
+    row-gap: 40px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .foodCards {
+    justify-content: center;
+  }
+}

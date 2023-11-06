@@ -40,3 +40,43 @@
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
+
+@media screen and (min-width: 2000px) {
+
+  .pageItem,
+  .outOfRange {
+    padding-block: 20px;
+    padding-inline: 32px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .pageList {
+    flex-wrap: wrap
+  }
+
+  .next {
+    order: 1;
+    border-radius: 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  .pageItem,
+  .outOfRange {
+    order: 2;
+  }
+
+  .previous {
+    order: 3;
+    border-radius: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .next,
+  .previous {
+    width: 100%;
+    order: 2;
+  }
+}

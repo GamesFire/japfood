@@ -9,3 +9,32 @@
   width: 100%;
   background-color: var(--bg-primary);
 }
+
+@media screen and (max-width: 1439px) {
+  .topLine {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .header {
+    padding-block: 16px;
+  }
+
+  .hamburgButton {
+    width: 30px;
+    height: 30px;
+    font-size: 28px;
+    line-height: 1.4;
+    color: var(--text-primary);
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+  }
+
+  .hamburgButton svg {
+    vertical-align: 0;
+  }
+}

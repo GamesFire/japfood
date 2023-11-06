@@ -52,3 +52,42 @@
   margin-top: 30px;
   transition: max-height 1s linear;
 }
+
+@media screen and (min-width: 2000px) {
+  .question {
+    font-size: 44px;
+  }
+
+  .icon {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+@media screen and (max-width: 1439px) {
+  .FAQ {
+    width: 75%;
+    margin-inline: auto;
+    margin-bottom: 116px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .FAQ {
+    width: 100%;
+  }
+
+  .questionCard {
+    padding-block: 12px;
+    padding-inline: 16px;
+  }
+
+  .question {
+    font-size: 20px;
+  }
+
+  .icon {
+    width: 32px;
+    height: 32px;
+  }
+}
