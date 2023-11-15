@@ -1,73 +1,142 @@
-import React from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
+import axios from "axios";
 import styles from "./PopularFood.module.css";
 import Container from "../../../../container/Container";
 import FoodCard from "./foodCard/FoodCard";
-
-import maguro from "../../../../../assets/images/categories/sushi/maguro.jpg";
-import ramen from "../../../../../assets/images/categories/soups/ramen.jpg";
-import dango from "../../../../../assets/images/categories/desserts/dango.jpg";
-import matcha from "../../../../../assets/images/categories/drinks/matcha.jpg";
+import Loading from "../../../../loading/Loading";
 
 const PopularFood = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const popularFoodLocalization = t("pages.home.sections.popular_food", {
+    returnObjects: true,
+  });
+
+  const [currentLanguage, setCurrentLanguage] = useState(
+    Cookies.get("i18next") || "uk"
+  );
+  const [popularFoodData, setPopularFoodData] = useState({
+    sushi: {},
+    soups: {},
+    desserts: {},
+    drinks: {},
+  });
+  const [popularFoodDataCache, setPopularFoodDataCache] = useState(new Map());
+  const [loading, setLoading] = useState(true);
+
+  const abortControllerRef = useRef(new AbortController());
+  const isInitialMount = useRef(true);
+  const intervalId = useRef(null);
+
+  const fetchPopularFoodData = useCallback(
+    async (language = currentLanguage) => {
+      if (isInitialMount.current) {
+        isInitialMount.current = false;
+        return;
+      }
+
+      abortControllerRef.current.abort();
+      abortControllerRef.current = new AbortController();
+
+      const cacheKey = `${Object.keys(popularFoodData)}-${language}`;
+
+      if (popularFoodDataCache.has(cacheKey)) {
+        setPopularFoodData(popularFoodDataCache.get(cacheKey));
+        setLoading(false);
+      } else {
+        try {
+          setLoading(true);
+
+          const response = await axios.get(
+            "http://localhost:80/dev/react/japfood/get_popular_food_data.php",
+            {
+              params: { currentLanguage: language },
+              signal: abortControllerRef.current.signal,
+            }
+          );
+
+          setPopularFoodDataCache(
+            new Map(popularFoodDataCache).set(cacheKey, response.data)
+          );
+          setPopularFoodData(response.data);
+          setLoading(false);
+        } catch (error) {
+          console.error("Error fetching popular food cards:", error);
+          setLoading(false);
+        }
+      }
+    },
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [popularFoodData, popularFoodDataCache]
+  );
+
+  useEffect(() => {
+    const newLanguage = Cookies.get("i18next") || "uk";
+    if (newLanguage !== currentLanguage) {
+      setLoading(true);
+      fetchPopularFoodData(newLanguage);
+      setCurrentLanguage(newLanguage);
+    }
+
+    intervalId.current = setInterval(() => {
+      const newLanguage = Cookies.get("i18next") || "uk";
+      if (newLanguage !== currentLanguage) {
+        fetchPopularFoodData(newLanguage);
+        setCurrentLanguage(newLanguage);
+      }
+    }, 100);
+
+    return () => clearInterval(intervalId.current);
+  }, [currentLanguage, fetchPopularFoodData]);
 
   const handleCategoryClick = (category) => {
     navigate(`/category-${category}`);
   };
 
-  const popularFood = {
-    sushi: {
-      name: "Магуро",
-      description:
-        "Делікатні скибочки свіжого рубіново-червоного тунця на приправленому оцтом рисі, виготовленому вручну...",
-    },
-    soups: {
-      name: "Рамен",
-      description:
-        "Насичений пікантний бульйон, що готується годинами, з ніжними шматочками повільно...",
-    },
-    desserts: {
-      name: "Данго",
-      description:
-        "Ці жувальні рисові галушки, які подають на шпажках, мають різноманітні смаки та кольори, кожен з яких...",
-    },
-    drinks: {
-      name: "Матча",
-      description:
-        "Насичений дрібно помелений зелений чай, вирощений у тіні, відомий своїм блискучим смарагдовим відтінком і...",
-    },
-  };
+  useEffect(() => {
+    fetchPopularFoodData();
+  }, [fetchPopularFoodData]);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  if (
+    Object.values(popularFoodData).every(
+      (categoryData) => Object.keys(categoryData).length === 0
+    )
+  ) {
+    return (
+      <section className={`section ${styles.popularFood}`}>
+        <Container>
+          <h2 className="subtitle">{popularFoodLocalization.subtitle}</h2>
+          <p className={styles.errorText}>
+            {popularFoodLocalization.error_text}
+          </p>
+        </Container>
+      </section>
+    );
+  }
 
   return (
     <section className={`section ${styles.popularFood}`}>
       <Container>
-        <h2 className="subtitle">Найпопулярніші з кожної категорії</h2>
+        <h2 className="subtitle">{popularFoodLocalization.subtitle}</h2>
         <div className={styles.foodCards}>
-          <FoodCard
-            picture={maguro}
-            name={popularFood.sushi.name}
-            description={popularFood.sushi.description}
-            onClick={() => handleCategoryClick("sushi")}
-          />
-          <FoodCard
-            picture={ramen}
-            name={popularFood.soups.name}
-            description={popularFood.soups.description}
-            onClick={() => handleCategoryClick("soups")}
-          />
-          <FoodCard
-            picture={dango}
-            name={popularFood.desserts.name}
-            description={popularFood.desserts.description}
-            onClick={() => handleCategoryClick("desserts")}
-          />
-          <FoodCard
-            picture={matcha}
-            name={popularFood.drinks.name}
-            description={popularFood.drinks.description}
-            onClick={() => handleCategoryClick("drinks")}
-          />
+          {Object.keys(popularFoodData).map((category) => (
+            <FoodCard
+              key={category}
+              name={popularFoodData[category].name}
+              image={popularFoodData[category].image}
+              imageName={popularFoodData[category].imageName}
+              description={popularFoodData[category].description}
+              onClick={() => handleCategoryClick(category)}
+            />
+          ))}
         </div>
       </Container>
     </section>

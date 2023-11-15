@@ -1,157 +1,127 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import styles from "./TermsAndConditions.module.css";
 import Container from "../../container/Container";
 
 const TermsAndConditions = () => {
+  const { t } = useTranslation();
+  const termsAndConditions = t("pages.terms_and_conditions", {
+    returnObjects: true,
+  });
+
   return (
     <main>
       <section className={`section`}>
         <Container>
           <div className={styles.content}>
-            <h1 className={`title ${styles.title}`}>Умови та Положення</h1>
-            <p className={styles.text}>
-              Ці "Умови та Положення" ("Угода") є юридичною угодою між Вами
-              ("Користувач" або "ви") і Japfood.cuisine ("ми", "нас" або "наш").
-              Ця Угода встановлює загальні умови та положення використання Вами
-              веб-сайту Japfood.cuisine ("Веб-сайт") і будь-яких пов'язаних з
-              ним послуг або контенту, що надаються Japfood.cuisine ("Послуги").
-            </p>
-            <p className={styles.text}>
-              Отримуючи доступ до Веб-сайту або використовуючи його, Ви
-              погоджуєтеся дотримуватися цих Умов та Положень. Якщо Ви не згодні
-              дотримуватися цієї Угоди, будь ласка, не використовуйте Веб-сайт.
-            </p>
+            <h1 className={`title ${styles.title}`}>
+              {termsAndConditions.title}
+            </h1>
+            <p className={styles.text}>{termsAndConditions.intro_1}</p>
+            <p className={styles.text}>{termsAndConditions.intro_2}</p>
             <h2 className={`subtitle ${styles.subtitle}`}>
-              1. Політика конфіденційності
+              {termsAndConditions.section_1_title}
             </h2>
             <ul className={styles.list}>
-              <li className={styles.listItem}>
-                Використання Вами Веб-сайту також регулюється нашою{" "}
-                <Link to="/privacy-policy" className={styles.link}>
-                  Політикою Конфіденційності
-                </Link>
-                , яка включена шляхом посилання в цю Угоду.
-              </li>
-              <li className={styles.listItem}>
-                Використовуючи Веб-сайт, Ви погоджуєтеся з умовами Політики
-                Конфіденційності.
-              </li>
+              {termsAndConditions.section_1_list.map((item, index) => (
+                <li className={styles.listItem} key={index}>
+                  {typeof item === "object" ? (
+                    <>
+                      {item.section_1_list_item_start}{" "}
+                      <Link to="/privacy-policy" className={styles.link}>
+                        {item.section_1_list_link}
+                      </Link>
+                      {item.section_1_list_item_end}
+                    </>
+                  ) : (
+                    item
+                  )}
+                </li>
+              ))}
             </ul>
             <h2 className={`subtitle ${styles.subtitle}`}>
-              2. Використання контенту
+              {termsAndConditions.section_2_title}
             </h2>
             <ul className={styles.list}>
-              <li className={styles.listItem}>
-                Вміст, доступний на Сайті, призначений лише для інформаційного
-                та особистого використання.
-              </li>
-              <li className={styles.listItem}>
-                Ви не маєте права копіювати, змінювати, поширювати або продавати
-                будь-який контент з цього Сайту.
-              </li>
-              <li className={styles.listItem}>
-                Комерційне використання або розповсюдження будь-якого контенту з
-                цього Сайту суворо заборонено.
-              </li>
+              {termsAndConditions.section_2_list.map((item, index) => (
+                <li className={styles.listItem} key={index}>
+                  {item}
+                </li>
+              ))}
             </ul>
             <h2 className={`subtitle ${styles.subtitle}`}>
-              3. Інформація про продукт
+              {termsAndConditions.section_3_title}
             </h2>
             <ul className={styles.list}>
-              <li className={styles.listItem}>
-                Інформація про продукцію, включаючи зображення, назви, ціни,
-                вагу, інгредієнти та описи, надана на Веб-сайті, носить
-                інформаційний характер.
-              </li>
-              <li className={styles.listItem}>
-                Ми не гарантуємо точність, повноту або своєчасність цієї
-                інформації.
-              </li>
+              {termsAndConditions.section_3_list.map((item, index) => (
+                <li className={styles.listItem} key={index}>
+                  {item}
+                </li>
+              ))}
             </ul>
             <h2 className={`subtitle ${styles.subtitle}`}>
-              4. Категорії та сортування
+              {termsAndConditions.section_4_title}
             </h2>
             <ul className={styles.list}>
-              <li className={styles.listItem}>
-                На Сайті представлено чотири категорії: Суші, Супи, Десерти та
-                Напої.
-              </li>
-              <li className={styles.listItem}>
-                Користувачі можуть шукати продукти за назвою в цих категоріях і
-                сортувати продукти за ціною та вагою.
-              </li>
-              <li className={styles.listItem}>
-                Ми намагаємося підтримувати інформацію про категорії в
-                актуальному стані, але не можемо гарантувати наявність
-                конкретних продуктів.
-              </li>
+              {termsAndConditions.section_4_list.map((item, index) => (
+                <li className={styles.listItem} key={index}>
+                  {item}
+                </li>
+              ))}
             </ul>
             <h2 className={`subtitle ${styles.subtitle}`}>
-              5. Зв'язок та підтримка
+              {termsAndConditions.section_5_title}
             </h2>
             <ul className={styles.list}>
-              <li className={styles.listItem}>
-                Користувачі можуть зв'язатися з нашою службою підтримки через
-                сторінку "Допомога", де передбачена форма для запитів.
-              </li>
-              <li className={styles.listItem}>
-                Ви погоджуєтеся надати точну та актуальну контактну інформацію.
-              </li>
-              <li className={styles.listItem}>
-                Ми прагнемо відповідати на запити вчасно, але не гарантуємо час
-                відповіді.
-              </li>
+              {termsAndConditions.section_5_list.map((item, index) => (
+                <li className={styles.listItem} key={index}>
+                  {item}
+                </li>
+              ))}
             </ul>
             <h2 className={`subtitle ${styles.subtitle}`}>
-              6. Авторське право та торгові марки
+              {termsAndConditions.section_6_title}
             </h2>
             <ul className={styles.list}>
-              <li className={styles.listItem}>
-                Весь контент і матеріали на цьому Веб-сайті, включаючи текст,
-                графіку, логотипи та зображення, є власністю Japfood.cuisine.
-              </li>
-              <li className={styles.listItem}>
-                Ви не можете використовувати наші торгові марки, торгові назви
-                або знаки обслуговування у зв'язку з будь-яким продуктом або
-                послугою, які не належать нам.
-              </li>
+              {termsAndConditions.section_6_list.map((item, index) => (
+                <li className={styles.listItem} key={index}>
+                  {item}
+                </li>
+              ))}
             </ul>
             <h2 className={`subtitle ${styles.subtitle}`}>
-              7. Зміни до умов та положень
+              {termsAndConditions.section_7_title}
             </h2>
             <ul className={styles.list}>
-              <li className={styles.listItem}>
-                Japfood.cuisine залишає за собою право змінювати, модифікувати
-                або переглядати ці Умови та Положення в будь-який час.
-              </li>
-              <li className={styles.listItem}>
-                Ваше подальше використання Веб-сайту після будь-яких таких змін
-                означає, що Ви приймаєте переглянуту Угоду.
-              </li>
-            </ul>
-            <h2 className={`subtitle ${styles.subtitle}`}>8. Припинення дії</h2>
-            <ul className={styles.list}>
-              <li className={styles.listItem}>
-                Japfood.cuisine може припинити або призупинити Ваш доступ до
-                Сайту без попереднього повідомлення з будь-якої причини.
-              </li>
+              {termsAndConditions.section_7_list.map((item, index) => (
+                <li className={styles.listItem} key={index}>
+                  {item}
+                </li>
+              ))}
             </ul>
             <h2 className={`subtitle ${styles.subtitle}`}>
-              9. Регулююче законодавство
+              {termsAndConditions.section_8_title}
             </h2>
             <ul className={styles.list}>
-              <li className={styles.listItem}>
-                Ці Умови та Положення регулюються і тлумачаться відповідно до
-                законодавства.
-              </li>
+              {termsAndConditions.section_8_list.map((item, index) => (
+                <li className={styles.listItem} key={index}>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <h2 className={`subtitle ${styles.subtitle}`}>
+              {termsAndConditions.section_9_title}
+            </h2>
+            <ul className={styles.list}>
+              {termsAndConditions.section_9_list.map((item, index) => (
+                <li className={styles.listItem} key={index}>
+                  {item}
+                </li>
+              ))}
             </ul>
             <p className={styles.text}>
-              <strong>
-                Якщо у Вас виникли запитання або сумніви щодо цих Умов та
-                Положень, будь ласка, зв'яжіться з нами через форму на сторінці
-                "Допомога" для отримання додаткової інформації.
-              </strong>
+              <strong>{termsAndConditions.note}</strong>
             </p>
           </div>
         </Container>

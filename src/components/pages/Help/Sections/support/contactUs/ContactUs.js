@@ -1,9 +1,16 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useTranslation } from "react-i18next";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./ContactUs.module.css";
 
 const ContactUs = () => {
+  const { t } = useTranslation();
+  const contactUsLocalization = t("pages.help.sections.support.contact_us", {
+    returnObjects: true,
+  });
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -41,21 +48,42 @@ const ContactUs = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (validateForm(formData)) {
-      notifySuccess(
-        "Ваше повідомлення надіслано. Очікуйте на відповідь на вказану адресу електронної пошти."
-      );
-      setSubmitDisabled(true);
-      setTimeout(() => setSubmitDisabled(false), 5000);
+      try {
+        setSubmitDisabled(true);
 
-      // Handle form submission, e.g., send the data to a server
-      console.log("Form data submitted:", formData);
+        const response = await axios.post(
+          "http://localhost:80/dev/react/japfood/submit_form.php",
+          new URLSearchParams(formData),
+          {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        );
+        console.log(response);
+        if (response.data.status === "success") {
+          notifySuccess(`${contactUsLocalization.notify_success}`);
+
+          setFormData({
+            name: "",
+            email: "",
+            subject: "",
+            message: "",
+          });
+        } else {
+          notifyError(contactUsLocalization.notify_error);
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        notifyError(contactUsLocalization.notify_error);
+      } finally {
+        setSubmitDisabled(false);
+      }
     }
-
-    setSubmitDisabled(true);
-    setTimeout(() => setSubmitDisabled(false), 5000);
   };
 
   const validateForm = (formData) => {
@@ -63,21 +91,17 @@ const ContactUs = () => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
     if (!name || !email || !subject || !message) {
-      notifyError(
-        "Всі поля є обов'язковими для заповнення. Будь ласка, заповніть всі поля."
-      );
+      notifyError(`${contactUsLocalization.notify_error_empty}`);
       return false;
     } else if (!email.match(emailRegex)) {
-      notifyError("Будь ласка, введіть дійсну адресу електронної пошти.");
+      notifyError(`${contactUsLocalization.notify_error_email}`);
       return false;
     } else if (
       name.length > 255 ||
       email.length > 255 ||
       subject.length > 255
     ) {
-      notifyError(
-        `Текстові поля (окрім "повідомлення") повинні містити максимум 255 символів.`
-      );
+      notifyError(`${contactUsLocalization.notify_error_max_symbols}`);
       return false;
     }
 
@@ -90,6 +114,12 @@ const ContactUs = () => {
       position: "bottom-center",
       draggable: false,
       theme: "colored",
+      onOpen: () => {
+        setSubmitDisabled(true);
+      },
+      onClose: () => {
+        setSubmitDisabled(false);
+      },
     });
   };
 
@@ -99,28 +129,33 @@ const ContactUs = () => {
       position: "bottom-center",
       draggable: false,
       theme: "colored",
+      onOpen: () => {
+        setSubmitDisabled(true);
+      },
+      onClose: () => {
+        setSubmitDisabled(false);
+      },
     });
   };
 
   return (
     <div className={styles.contactUs}>
-      <h2 className={`subtitle ${styles.subtitle}`}>Зв'яжіться з нами</h2>
-      <p className={styles.text}>
-        Ми цінуємо ваш внесок і готові допомогти вам на кожному кроці. Якщо у
-        вас виникли запитання, проблеми або побажання, будь ласка, зв'яжіться з
-        нашою службою підтримки клієнтів через наведену форму нижче, і ми з
-        радістю вам допоможемо.
-      </p>
+      <h2 className={`subtitle ${styles.subtitle}`}>
+        {contactUsLocalization.subtitle}
+      </h2>
+      <p className={styles.text}>{contactUsLocalization.text}</p>
       <form
         onSubmit={handleSubmit}
         className={styles.form}
         autoComplete="off"
         noValidate
       >
-        <h3 className={styles.formHeader}>Надіслати нам повідомлення</h3>
+        <h3 className={styles.formHeader}>
+          {contactUsLocalization.form_header}
+        </h3>
         <div className={styles.formGroup}>
           <label htmlFor="name" className={styles.label}>
-            Ім'я:
+            {contactUsLocalization.form_name}
           </label>
           <input
             type="text"
@@ -135,7 +170,7 @@ const ContactUs = () => {
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="email" className={styles.label}>
-            E-mail:
+            {contactUsLocalization.form_email}
           </label>
           <input
             type="email"
@@ -150,7 +185,7 @@ const ContactUs = () => {
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="subject" className={styles.label}>
-            Тема:
+            {contactUsLocalization.form_subject}
           </label>
           <input
             type="text"
@@ -165,7 +200,7 @@ const ContactUs = () => {
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="message" className={styles.label}>
-            Повідомлення:
+            {contactUsLocalization.form_message}
           </label>
           <textarea
             id="message"
@@ -182,7 +217,7 @@ const ContactUs = () => {
           className={styles.submitButton}
           disabled={isSubmitDisabled}
         >
-          Надіслати
+          {contactUsLocalization.form_submit}
         </button>
       </form>
       <ToastContainer limit={1} />

@@ -4,9 +4,24 @@
   column-gap: 24px;
 }
 
+.errorText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+  font-family: 'Noto Sans Medium', sans-serif;
+  font-size: 20px;
+  text-align: center;
+  margin-block: 0;
+}
+
 @media screen and (min-width: 2000px) {
   .foodCards {
     column-gap: 52px;
+  }
+
+  .errorText {
+    font-size: 32px;
   }
 }
 
@@ -16,6 +31,10 @@
     justify-content: space-between;
     column-gap: 0;
     row-gap: 40px;
+  }
+
+  .errorText {
+    font-size: 16px;
   }
 }
 

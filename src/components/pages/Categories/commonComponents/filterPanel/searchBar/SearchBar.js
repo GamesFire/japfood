@@ -1,12 +1,17 @@
 import React, { useState, useContext } from "react";
 import styles from "./SearchBar.module.css";
 import { ThemeContext } from "../../../../../../Theme";
+import { useTranslation } from "react-i18next";
 
 import LoupeDark from "../../../../../../assets/images/icons/dark/loupe-dark.svg";
 import LoupeLight from "../../../../../../assets/images/icons/light/loupe-light.svg";
 
-const SearchBar = ({ onSearch, isSeacrhButtonDisabled }) => {
+const SearchBar = ({ onSearch, isDisabled }) => {
   const { isDarkTheme } = useContext(ThemeContext);
+  const { t } = useTranslation();
+  const searchBarLocalization = t("pages.categories.filter_panel.search_bar", {
+    returnObjects: true,
+  });
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -31,8 +36,9 @@ const SearchBar = ({ onSearch, isSeacrhButtonDisabled }) => {
       <input
         type="text"
         name="searchByName"
-        placeholder="Пошук за назвою"
+        placeholder={searchBarLocalization.search_by_name}
         className={styles.searchInput}
+        autoComplete="off"
         onFocus={handleFocus}
         onBlur={handleBlur}
         value={searchQuery}
@@ -42,7 +48,7 @@ const SearchBar = ({ onSearch, isSeacrhButtonDisabled }) => {
         type="button"
         className={styles.searchButton}
         onClick={handleSearch}
-        disabled={isSeacrhButtonDisabled}
+        disabled={isDisabled}
       >
         <span className={styles.iconContainer}>
           <img
@@ -51,7 +57,9 @@ const SearchBar = ({ onSearch, isSeacrhButtonDisabled }) => {
             className={styles.icon}
           />
         </span>
-        <span className={styles.searchButtonText}>Пошук</span>
+        <span className={styles.searchButtonText}>
+          {searchBarLocalization.search}
+        </span>
       </button>
     </div>
   );

@@ -22,6 +22,10 @@
   margin-right: 8px;
 }
 
+.languageButtonText.disabled {
+  color: var(--color-nibi);
+}
+
 .arrowDown,
 .arrowUp {
   position: absolute;
@@ -30,6 +34,11 @@
   color: var(--text-primary);
   transform: translateY(-50%);
   transition: transform .3s ease-in-out;
+}
+
+.arrowDown.disabled,
+.arrowUp.disabled {
+  color: var(--color-nibi);
 }
 
 .arrowDown {
@@ -64,6 +73,10 @@
 }
 
 .languageOption:hover {
+  background-color: var(--color-imayoh);
+}
+
+.activeLanguage {
   background-color: var(--color-imayoh);
 }
 
@@ -146,7 +159,7 @@
     position: static;
     display: block;
     min-width: 100%;
-    font-size: 32px;
+    font-size: 28px;
   }
 
   .languageButton {
@@ -158,13 +171,13 @@
   }
 
   .languageButtonText {
-    font-size: 32px;
+    font-size: 28px;
   }
 
   .arrowDown,
   .arrowUp {
     right: 12px;
-    font-size: 32px;
+    font-size: 28px;
     vertical-align: middle;
   }
 

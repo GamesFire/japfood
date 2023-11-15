@@ -1,45 +1,16 @@
 import React, { useState } from "react";
 import styles from "./FAQ.module.css";
+import i18next from "i18next";
+import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 
 const FAQ = () => {
-  const faqData = [
-    {
-      question: "Як переглянути каталог?",
-      answer: `Щоб переглянути наш великий каталог страв японської кухні, просто наведіть курсор миші на меню "Категорії", розташоване у верхній частині сторінки. Звідти ви можете вибрати з широкого спектру категорій, включаючи Суші, Супи, Десерти та Напої. Натисніть на будь-яку категорію, щоб переглянути апетитний вибір страв.`,
-    },
-    {
-      question: "Як зробити замовлення?",
-      answer: `Наразі ми надаємо повний каталог японських страв та напоїв для вашого натхнення та інформації. Однак ми не обробляємо замовлення безпосередньо. Ми рекомендуємо відвідати ресторан чи заклад безпосередньо або скористатися послугою доставки їжі, щоб насолодитися цими вишуканими стравами.`,
-    },
-    {
-      question: "Чи можу я фільтрувати та шукати певні страви або інгредієнти?",
-      answer: `Так, ви можете! Скористайтеся нашим пошуковим рядком, розташованим у верхній частині сторінок-категорій, щоб знайти конкретні страви за назвою. Крім того, ви можете уточнити пошук за ціною або вагою, використовуючи наш фільтр сортування на сторінках категорій.`,
-    },
-    {
-      question: "Чи точні вказані ціни?",
-      answer: `Хоча ми прагнемо надавати точну інформацію, будь ласка, зверніть увагу, що ціни можуть відрізнятися в залежності від ресторану, місця розташування та інших факторів. Ми рекомендуємо звертатися до конкретного закладу за найактуальнішими цінами.`,
-    },
-    {
-      question: "Як зв'язатися зі службою підтримки?",
-      answer: `З будь-якими питаннями, відгуками або за допомогою, будь ласка, звертайтеся до нашої спеціалізованої команди підтримки клієнтів. Ви можете зв'язатися з нами через форму, яка знаходиться на цій же сторінці, і ми будемо раді допомогти вам якнайшвидше.`,
-    },
-    {
-      question: "Чи є Політику Конфіденційності?",
-      answer: `Так, звісно є! Ви можете знайти нашу Політику Конфіденційності на веб-сайті, перейшовши за посиланням у футері сайту на сторінку "Політика конфіденційності". Ця сторінка містить важливу інформацію про те, як ми обробляємо Вашу особисту інформацію для забезпечення конфіденційності та безпеки.`,
-    },
-    {
-      question: "Де переглянути Умови та Положення?",
-      answer: `Умови та Положення для нашого веб-сайту розміщені за посиланням у футері сайту на відповідній сторінці "Умови та Положення". Ви можете переглянути цю угоду для отримання детальної інформації про обмеження та вимоги, пов'язані з використанням нашого веб-сайту.`,
-    },
-    {
-      question:
-        "Які найпопулярніші страви у кожній категорії і як ви їх визначили?",
-      answer: `У нас є секція "Найпопулярніші з кожної категорії" на головній сторінці, яка містить найбільш популярні страви з кожної нашої категорії: Суші, Супи, Десерти та Напої. Це обрана їжа, яка отримала найбільшу популярність серед кожної категорії на основі численних опитувань людей по всьому світу.`,
-    },
-  ];
-
+  const { t } = useTranslation();
+  const faqs = i18next.t(
+    "pages.help.sections.support.faq.questions_and_answers",
+    { returnObjects: true }
+  );
   const [activeIndices, setActiveIndices] = useState([]);
 
   const toggleAnswer = (index) => {
@@ -52,11 +23,13 @@ const FAQ = () => {
 
   return (
     <div className={styles.FAQ}>
-      <h2 className={`subtitle ${styles.subtitle}`}>Поширені запитання</h2>
+      <h2 className={`subtitle ${styles.subtitle}`}>
+        {t("pages.help.sections.support.faq.subtitle")}
+      </h2>
       <div className={styles.questionList}>
-        {faqData.map((item, index) => (
+        {faqs.map((item) => (
           <div
-            key={index}
+            key={item.id}
             className={styles.questionCard}
             onMouseDown={(e) => {
               if (e.detail > 1) {
@@ -65,17 +38,20 @@ const FAQ = () => {
             }}
           >
             <div className={styles.question}>
-              <div className={styles.icon} onClick={() => toggleAnswer(index)}>
+              <div
+                className={styles.icon}
+                onClick={() => toggleAnswer(item.id)}
+              >
                 <FontAwesomeIcon
-                  icon={activeIndices.includes(index) ? faMinus : faPlus}
+                  icon={activeIndices.includes(item.id) ? faMinus : faPlus}
                 />
               </div>
-              <span className={styles.questionNumber}>{`${index + 1}. `}</span>
+              <span className={styles.questionNumber}>{`${item.id}. `}</span>
               {item.question}
             </div>
             <div
               className={`${styles.answer} ${
-                activeIndices.includes(index) ? styles.active : ""
+                activeIndices.includes(item.id) ? styles.active : ""
               }`}
             >
               {item.answer}

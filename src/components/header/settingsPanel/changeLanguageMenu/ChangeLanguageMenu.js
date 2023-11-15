@@ -1,27 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LanguageOption from "./LanguageOption";
 import LanguageMenuDropdown from "./LanguageMenuDropdown";
+import Cookies from "js-cookie";
+import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import styles from "./LanguageMenu.module.css";
+
 import UkrainianFlagIcon from "../../../../assets/images/icons/ukraine-flag.png";
 import EnglishFlagIcon from "../../../../assets/images/icons/usa-flag.png";
-import styles from "./LanguageMenu.module.css";
 
 const ChangeLanguageMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [canChangeLanguage, setCanChangeLanguage] = useState(true);
+  const { t, i18n } = useTranslation();
+  const changeLanguageMenuLocalization = t("header.change_language_menu", {
+    returnObjects: true,
+  });
+
+  const currentLanguage = Cookies.get("i18next");
 
   const handleMenuOpen = () => {
-    setIsMenuOpen(true);
+    if (canChangeLanguage) {
+      setIsMenuOpen(true);
+    }
   };
 
   const handleMenuClose = () => {
-    setIsMenuOpen(false);
+    if (canChangeLanguage) {
+      setIsMenuOpen(false);
+    }
   };
 
   const handleLanguageClick = (language) => {
-    console.log(`Selected language: ${language}`);
+    if (canChangeLanguage) {
+      i18n.changeLanguage(language);
+      setCanChangeLanguage(false);
+
+      setTimeout(() => {
+        setCanChangeLanguage(true);
+      }, 5000);
+    }
     handleMenuClose();
   };
+
+  useEffect(() => {
+    return () => {
+      clearTimeout();
+    };
+  }, []);
 
   return (
     <div
@@ -30,22 +57,31 @@ const ChangeLanguageMenu = () => {
       onMouseLeave={handleMenuClose}
     >
       <button className={styles.languageButton}>
-        <span className={styles.languageButtonText}>Оберіть мову</span>
+        <span
+          className={`${styles.languageButtonText} ${
+            !canChangeLanguage ? styles.disabled : ""
+          }`}
+        >
+          {changeLanguageMenuLocalization.choose_language}
+        </span>
         <FontAwesomeIcon
           icon={faCaretDown}
-          className={isMenuOpen ? styles.arrowUp : styles.arrowDown}
+          className={`${isMenuOpen ? styles.arrowUp : styles.arrowDown} 
+          ${!canChangeLanguage ? styles.disabled : ""}`}
         />
       </button>
-      <LanguageMenuDropdown isOpen={isMenuOpen} closeMenu={handleMenuClose}>
+      <LanguageMenuDropdown isOpen={isMenuOpen}>
         <LanguageOption
-          onClick={() => handleLanguageClick("Ukrainian")}
-          label="Українська"
+          onClick={() => handleLanguageClick("uk")}
+          label={changeLanguageMenuLocalization.ukrainian}
           flagIcon={UkrainianFlagIcon}
+          isActive={currentLanguage === "uk"}
         />
         <LanguageOption
-          onClick={() => handleLanguageClick("English")}
-          label="Англійська"
+          onClick={() => handleLanguageClick("en")}
+          label={changeLanguageMenuLocalization.english}
           flagIcon={EnglishFlagIcon}
+          isActive={currentLanguage === "en"}
         />
       </LanguageMenuDropdown>
     </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./FoodCard.module.css";
+import { useTranslation } from "react-i18next";
 import { Flipper, Flipped } from "react-flip-toolkit";
 
 const FoodCard = ({
@@ -11,6 +12,10 @@ const FoodCard = ({
   ingredients,
   description,
 }) => {
+  const { t } = useTranslation();
+  const foodCardContent = t("pages.categories.food_list.food_card", {
+    returnObjects: true,
+  });
   const [imageSrc, setImageSrc] = useState(null);
   const [isFlipped, setIsFlipped] = useState(false);
   const [activeSide, setActiveSide] = useState("front");
@@ -31,14 +36,16 @@ const FoodCard = ({
     <div className={styles.contentContainer}>
       <h3 className={styles.name}>{name}</h3>
       <p className={styles.weight}>
-        <span className={styles.label}>Вага за шматок:</span> {weight} г
+        <span className={styles.label}>{foodCardContent.weight_per_piece}</span>{" "}
+        {weight} {foodCardContent.grams}
       </p>
       <p className={styles.averagePrice}>
-        <span className={styles.label}>Середня ціна (за штуку):</span>{" "}
+        <span className={styles.label}>{foodCardContent.average_price}</span>{" "}
         {averagePrice}$
       </p>
       <p className={styles.ingredients}>
-        <span className={styles.label}>Інгредієнти:</span> {ingredients}
+        <span className={styles.label}>{foodCardContent.ingredients}</span>{" "}
+        {ingredients}
       </p>
     </div>
   );

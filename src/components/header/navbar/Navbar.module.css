@@ -173,7 +173,7 @@
     align-items: flex-start;
     column-gap: 0;
     row-gap: 20px;
-    font-size: 32px;
+    font-size: 28px;
     margin-top: 52px;
   }
 
@@ -196,13 +196,13 @@
   }
 
   .buttonText {
-    font-size: 32px;
+    font-size: 28px;
   }
 
   .arrowDown,
   .arrowUp {
     right: 12px;
-    font-size: 32px;
+    font-size: 28px;
     vertical-align: middle;
   }
 

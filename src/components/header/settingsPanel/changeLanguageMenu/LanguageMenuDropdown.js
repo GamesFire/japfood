@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import styles from "./LanguageMenu.module.css";
 
-const LanguageMenuDropdown = ({ isOpen, closeMenu, children }) => {
+const LanguageMenuDropdown = ({ isOpen, children }) => {
   const dropdownRef = useRef(null);
 
   return (

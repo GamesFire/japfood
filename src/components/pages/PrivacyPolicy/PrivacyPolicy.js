@@ -1,157 +1,135 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import styles from "./PrivacyPolicy.module.css";
 import Container from "../../container/Container";
 
 const PrivacyPolicy = () => {
+  const { t } = useTranslation();
+  const privacyPolicy = t("pages.privacy_policy", { returnObjects: true });
+
   return (
     <main>
       <section className={`section`}>
         <Container>
           <div className={styles.content}>
-            <h1 className={`title ${styles.title}`}>
-              Політика Конфіденційності
-            </h1>
-            <p className={styles.text}>Дата набуття чинності: 23.10.2023</p>
-            <p className={styles.text}>
-              Ми на Japfood.cuisine ("ми", "наш" або "нас") цінуємо Вашу
-              конфіденційність і зобов'язуємося захищати Вашу особисту
-              інформацію. Ця Політика Конфіденційності пояснює, як ми збираємо,
-              використовуємо, розкриваємо та захищаємо Ваші персональні дані.
-              Користуючись нашим веб-сайтом, Ви погоджуєтеся з практиками,
-              описаними в цій політиці.
-            </p>
+            <h1 className={`title ${styles.title}`}>{privacyPolicy.title}</h1>
+            <p className={styles.text}>{privacyPolicy.effective_date}</p>
+            <p className={styles.text}>{privacyPolicy.intro}</p>
             <h2 className={`subtitle ${styles.subtitle}`}>
-              1. Умови використання
+              {privacyPolicy.section_1_title}
             </h2>
             <p className={styles.text}>
-              <strong>1.1. Загальні положення:</strong> Ваше використання цього
-              Веб-сайту підпорядковане нашими{" "}
+              <strong>{privacyPolicy.section_1_1}</strong>{" "}
+              {privacyPolicy.section_1_1_content}{" "}
               <Link to="/terms-and-conditions" className={styles.link}>
-                Умовами та Положеннями
+                {privacyPolicy.section_1_1_link}
               </Link>
               .
             </p>
             <h2 className={`subtitle ${styles.subtitle}`}>
-              2. Інформація, яку ми збираємо
+              {privacyPolicy.section_2_title}
             </h2>
             <p className={styles.text}>
-              <strong>2.1. Особиста інформація:</strong> Коли Ви зв'язуєтеся з
-              нами через сторінку "Допомога", ми можемо збирати наступну
-              інформацію:
+              <strong>{privacyPolicy.section_2_1}</strong>{" "}
+              {privacyPolicy.section_2_1_content}
             </p>
             <ul className={styles.list}>
-              <li className={styles.listItem}>Ваше ім'я.</li>
               <li className={styles.listItem}>
-                Вашу адресу електронної пошти.
+                {privacyPolicy.section_2_1_list[0]}
+              </li>
+              <li className={styles.listItem}>
+                {privacyPolicy.section_2_1_list[1]}
               </li>
             </ul>
             <p className={styles.text}>
-              <strong>2.2. Вміст, створений користувачем:</strong> Будь-яка
-              додаткова інформація або контент, яку Ви добровільно надаєте, коли
-              зв'язуєтеся з нами або взаємодієте з нашим Веб-сайтом.
+              <strong>{privacyPolicy.section_2_2}</strong>{" "}
+              {privacyPolicy.section_2_2_content}
             </p>
             <h2 className={`subtitle ${styles.subtitle}`}>
-              3. Використання інформації
+              {privacyPolicy.section_3_title}
             </h2>
             <p className={styles.text}>
-              <strong>3.1. Спілкування:</strong> Ми використовуємо Вашу особисту
-              інформацію, таку як Ваше ім'я та Вашу адресу електронної пошти,
-              щоб відповідати на Ваші запити та надавати підтримку клієнтам.
+              <strong>{privacyPolicy.section_3_1}</strong>{" "}
+              {privacyPolicy.section_3_1_content}
             </p>
             <p className={styles.text}>
-              <strong>3.2. Покращення наших послуг:</strong> Ми можемо
-              використовувати Ваші відгуки або іншу надану інформацію для
-              покращення нашого Веб-сайту та Послуг.
+              <strong>{privacyPolicy.section_3_2}</strong>{" "}
+              {privacyPolicy.section_3_2_content}
             </p>
             <h2 className={`subtitle ${styles.subtitle}`}>
-              4. Обмін інформацією та розкриття інформації
+              {privacyPolicy.section_4_title}
             </h2>
             <p className={styles.text}>
-              <strong>4.1. Послуги третіх осіб:</strong> Ми не передаємо Вашу
-              особисту інформацію третім особам, за винятком випадків, коли це
-              необхідно для надання наших Послуг (наприклад,
-              хостинг-провайдерам).
+              <strong>{privacyPolicy.section_4_1}</strong>{" "}
+              {privacyPolicy.section_4_1_content}
             </p>
             <p className={styles.text}>
-              <strong>4.2. Юридичні вимоги:</strong> Ми можемо розкрити Вашу
-              інформацію, якщо цього вимагає закон, щоб захистити наші права або
-              відповісти на судові процеси.
+              <strong>{privacyPolicy.section_4_2}</strong>{" "}
+              {privacyPolicy.section_4_2_content}
             </p>
             <h2 className={`subtitle ${styles.subtitle}`}>
-              5. Захист і безпека даних
+              {privacyPolicy.section_5_title}
             </h2>
             <p className={styles.text}>
-              <strong>5.1. Безпека даних:</strong> Ми вживаємо належних заходів
-              для захисту Ваших персональних даних від несанкціонованого
-              доступу, зміни, розкриття або знищення.
+              <strong>{privacyPolicy.section_5_1}</strong>{" "}
+              {privacyPolicy.section_5_1_content}
             </p>
             <p className={styles.text}>
-              <strong>5.2. Зберігання даних:</strong> Ми зберігаємо Ваші
-              персональні дані стільки, скільки необхідно для виконання цілей,
-              викладених у цій Політиці Конфіденційності, якщо тільки довший
-              термін зберігання не вимагається законом.
+              <strong>{privacyPolicy.section_5_2}</strong>{" "}
+              {privacyPolicy.section_5_2_content}
             </p>
             <h2 className={`subtitle ${styles.subtitle}`}>
-              6. Файли cookie та технології відстеження
+              {privacyPolicy.section_6_title}
             </h2>
             <p className={styles.text}>
-              <strong>6.1. Файли cookie:</strong> Ми можемо використовувати
-              файли cookie та подібні технології відстеження, щоб покращити Ваш
-              досвід перегляду веб-сторінок. Ви можете керувати своїми
-              налаштуваннями, пов'язаними з файлами cookie.
+              <strong>{privacyPolicy.section_6_1}</strong>{" "}
+              {privacyPolicy.section_6_1_content}
             </p>
             <h2 className={`subtitle ${styles.subtitle}`}>
-              7. Сторонні посилання
+              {privacyPolicy.section_7_title}
             </h2>
             <p className={styles.text}>
-              <strong>7.1. Зовнішні посилання:</strong> Наш Веб-сайт може
-              містити посилання на зовнішні сайти. Ми не несемо відповідальності
-              за політику конфіденційності та зміст цих сайтів.
+              <strong>{privacyPolicy.section_7_1}</strong>{" "}
+              {privacyPolicy.section_7_1_content}
             </p>
             <h2 className={`subtitle ${styles.subtitle}`}>
-              8. Конфіденційність дітей
+              {privacyPolicy.section_8_title}
             </h2>
             <p className={styles.text}>
-              <strong>8.1. Вікові обмеження:</strong> Наші послуги призначені
-              для осіб будь-якого віку. Ми свідомо збираємо інформацію від людей
-              різного віку. Якщо Ви є батьком або опікуном і вважаєте, що ми
-              могли ненавмисно зібрати особисту інформацію від дитини, будь
-              ласка, зв'яжіться з нами, щоб видалити її.
-            </p>
-            <h2 className={`subtitle ${styles.subtitle}`}>9. Ваші права</h2>
-            <p className={styles.text}>
-              <strong>9.1. Доступ і виправлення:</strong> Ви маєте право на
-              доступ до своєї особистої інформації та її виправлення. Ви можете
-              зв'язатися з нами, щоб подати запит на доступ або виправлення.
-            </p>
-            <p className={styles.text}>
-              <strong>9.2. Відмова від отримання:</strong> Ви можете відмовитися
-              від отримання маркетингових комунікацій від нас у будь-який час.
+              <strong>{privacyPolicy.section_8_1}</strong>{" "}
+              {privacyPolicy.section_8_1_content}
             </p>
             <h2 className={`subtitle ${styles.subtitle}`}>
-              10. Зміни до цієї Політики конфіденційності
+              {privacyPolicy.section_9_title}
             </h2>
             <p className={styles.text}>
-              <strong>10.1. Оновлення політики:</strong> Ми можемо час від часу
-              оновлювати цю Політику Конфіденційності, щоб відобразити зміни в
-              нашій практиці або з інших операційних, юридичних або регуляторних
-              причин. Ми повідомимо Вас про будь-які суттєві зміни.
+              <strong>{privacyPolicy.section_9_1}</strong>{" "}
+              {privacyPolicy.section_9_1_content}
+            </p>
+            <p className={styles.text}>
+              <strong>{privacyPolicy.section_9_2}</strong>{" "}
+              {privacyPolicy.section_9_2_content}
             </p>
             <h2 className={`subtitle ${styles.subtitle}`}>
-              11. Зв'язок з нами
+              {privacyPolicy.section_10_title}
             </h2>
             <p className={styles.text}>
-              <strong>11.1.</strong> Якщо у Вас виникли будь-які питання,
-              занепокоєння або запити щодо Вашої особистої інформації або цієї
-              Політики Конфіденційності, будь ласка, зв'яжіться з нами через
-              спеціальну форму на сторінці "Допомога".
+              <strong>{privacyPolicy.section_10_1}</strong>{" "}
+              {privacyPolicy.section_10_1_content}
+            </p>
+            <h2 className={`subtitle ${styles.subtitle}`}>
+              {privacyPolicy.section_11_title}
+            </h2>
+            <p className={styles.text}>
+              <strong>{privacyPolicy.section_11_1}</strong>{" "}
+              {privacyPolicy.section_11_1_content}
             </p>
             <p className={styles.text}>
               <strong>
-                Ця Політика Конфіденційності востаннє була оновлена 23 жовтня
-                2023 року і діє з цієї дати.
-                <br />© 2023 Copyright: Japfood.cuisine. Всі права захищені.
+                {privacyPolicy.note}
+                <br />
+                {privacyPolicy.copyright_note}
               </strong>
             </p>
           </div>

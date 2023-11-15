@@ -5,3 +5,9 @@
 .item {
   font-family: 'Noto Sans Medium', sans-serif !important;
 }
+
+.sortMenu:disabled,
+.sortMenu[disabled] {
+  color: var(--color-nibi);
+  cursor: not-allowed;
+}

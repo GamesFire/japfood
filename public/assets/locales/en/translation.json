@@ -1,0 +1,261 @@
+{
+  "loading": "Loading...",
+  "header": {
+    "navbar": {
+      "home": "Home",
+      "categories": "Categories",
+      "sushi": "Sushi",
+      "soups": "Soups",
+      "desserts": "Desserts",
+      "drinks": "Drinks",
+      "help": "Help"
+    },
+    "change_language_menu": {
+      "choose_language": "Choose language",
+      "ukrainian": "Українська",
+      "english": "English"
+    }
+  },
+  "footer": {
+    "top_footer": {
+      "footer_site_info": {
+        "slogan": "Internet catalog of Japanese cuisine"
+      },
+      "footer_links": {
+        "privacy_policy": "Privacy Policy",
+        "terms_and_conditions": "Terms and Conditions"
+      }
+    }
+  },
+  "pages": {
+    "home": {
+      "sections": {
+        "hero": {
+          "hero_title": "Discover the art of Japanese cuisine"
+        },
+        "popular_food": {
+          "subtitle": "The most popular from each category",
+          "error_text": "The most popular food cards from each category are currently unavailable. Please try again later.",
+          "food_card": {
+            "learn_more": "Learn more"
+          }
+        }
+      }
+    },
+    "categories": {
+      "filter_panel": {
+        "search_bar": {
+          "search_by_name": "Search by name",
+          "search": "Search"
+        },
+        "sort_menu": {
+          "sorting": "Sorting",
+          "price_from_cheap_to_expensive": "Price: From cheap to expensive",
+          "price_from_expensive_to_cheap": "Price: From expensive to cheap",
+          "weight_from_light_to_heavy": "Weight: From light to heavy",
+          "weight_from_heavy_to_light": "Weight: From heavy to light",
+          "clear_the_sorting": "Clear the sorting"
+        }
+      },
+      "food_list": {
+        "food_card": {
+          "weight_per_piece": "The weight per piece:",
+          "grams": "g",
+          "average_price": "Average price (per piece):",
+          "ingredients": "Ingredients:"
+        }
+      },
+      "pagination": {
+        "previous": "Previous",
+        "next": "Next"
+      }
+    },
+    "help": {
+      "sections": {
+        "main_text": {
+          "title": "Welcome to our help center",
+          "subtitle": "We are here to help you",
+          "text": "Thank you for choosing Japfood as the place to start your exploration of the rich and delicious world of Japanese cuisine. We strive to provide you with the best experience as you discover and savor the flavors of Japan. Our help center is designed to help you navigate our site and get the most out of your culinary journey."
+        },
+        "support": {
+          "faq": {
+            "subtitle": "Frequently asked questions",
+            "questions_and_answers": [
+              {
+                "id": 1,
+                "question": "How to view the catalog?",
+                "answer": "To browse our extensive catalog of Japanese food, simply hover your mouse over the \"Categories\" menu located at the top of the page. From there, you can choose from a wide range of categories including Sushi, Soups, Desserts, and Drinks. Click on any category to browse a mouthwatering selection of dishes."
+              },
+              {
+                "id": 2,
+                "question": "How to place an order?",
+                "answer": "We currently provide a complete catalog of Japanese food and drink for your inspiration and information. However, we do not process orders directly. We recommend that you visit a restaurant or establishment directly or use a food delivery service to enjoy these delicious dishes."
+              },
+              {
+                "id": 3,
+                "question": "Can I filter and search for specific dishes or ingredients?",
+                "answer": "Yes, you can! Use our search bar located at the top of the category pages to find specific dishes by name. Alternatively, you can refine your search by price or weight using our sort filter on the category pages."
+              },
+              {
+                "id": 4,
+                "question": "Are the prices listed accurate?",
+                "answer": "While we strive to provide accurate information, please note that prices may vary depending on the restaurant, location, and other factors. We recommend contacting a specific restaurant for the most current prices."
+              },
+              {
+                "id": 5,
+                "question": "How to contact the support team?",
+                "answer": "For any questions, feedback or assistance, please do not hesitate to contact our dedicated customer support team. You can contact us via the form found on the same page and we will be happy to assist you as soon as possible."
+              },
+              {
+                "id": 6,
+                "question": "Do you have a Privacy Policy?",
+                "answer": "Yes, of course we do! You can find our Privacy Policy on the website by clicking on the link in the footer to the \"Privacy Policy\" page. This page contains important information about how we process your personal information to ensure your privacy and security."
+              },
+              {
+                "id": 7,
+                "question": "Where can I view the Terms and Conditions?",
+                "answer": "The Terms and Conditions for our website are available by clicking on the link in the footer of the website on the corresponding page \"Terms and Conditions\". You can review this agreement for detailed information about the restrictions and requirements related to the use of our website."
+              },
+              {
+                "id": 8,
+                "question": "What are the most popular dishes in each category and how did you determine them?",
+                "answer": "We have a section \"Most Popular from each category\" on the main page that contains the most popular dishes from each of our categories: Sushi, Soups, Desserts, and Drinks. These are the selected foods that have received the most popularity from each category based on numerous surveys of people around the world."
+              }
+            ]
+          },
+          "contact_us": {
+            "subtitle": "Contact us",
+            "text": "We value your input and are here to help you every step of the way. If you have any questions, concerns, or suggestions, please contact our customer support team via the form below and we will be happy to assist you.",
+            "form_header": "Send us a message",
+            "form_name": "Name:",
+            "form_email": "E-mail:",
+            "form_subject": "Subject:",
+            "form_message": "Message:",
+            "form_submit": "Submit",
+            "notify_success": "Your message has been sent. Expect a reply to the specified email address.",
+            "notify_error": "An unexpected error occurred",
+            "notify_error_empty": "All fields are required. Please fill in all fields.",
+            "notify_error_email": "Please enter a valid email address.",
+            "notify_error_max_symbols": "Text fields (except for \"Message\") should contain a maximum of 255 characters."
+          }
+        }
+      }
+    },
+    "no_page": {
+      "title": "404 - Not found",
+      "text": "The page you are looking for may be located elsewhere.",
+      "back_to_home_page": "Back to the home page"
+    },
+    "privacy_policy": {
+      "title": "Privacy Policy",
+      "effective_date": "Effective Date: 23.10.2023",
+      "intro": "We at Japfood.cuisine (\"we\", \"our\" or \"us\") value your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose and protect your personal information. By using our website, you agree to the practices described in this policy.",
+      "section_1_title": "1. Terms of Use",
+      "section_1_1": "1.1. General provisions:",
+      "section_1_1_content": "Your use of this Website is subject to ours.",
+      "section_1_1_link": "Terms and Conditions",
+      "section_2_title": "2. Information we collect",
+      "section_2_1": "2.1. Personal information:",
+      "section_2_1_content": "When you contact us through the \"Help\" page, we may collect the following information:",
+      "section_2_1_list": [
+        "Your name.",
+        "Your email address."
+      ],
+      "section_2_2": "2.2 User-generated content:",
+      "section_2_2_content": "Any additional information or content you voluntarily provide when you contact us or interact with our Website.",
+      "section_3_title": "3. Use of Information",
+      "section_3_1": "3.1. Communication:",
+      "section_3_1_content": "We use your personal information, such as your name and your email address, to respond to your inquiries and provide customer support.",
+      "section_3_2": "3.2. Improving our services:",
+      "section_3_2_content": "We may use your feedback or other information you provide to improve our Website and Services.",
+      "section_4_title": "4. Information Sharing and Disclosures",
+      "section_4_1": "4.1 Third Party Services:",
+      "section_4_1_content": "We do not share your personal information with third parties, except as necessary to provide our Services (e.g., hosting providers).",
+      "section_4_2": "4.2 Legal Requirements:",
+      "section_4_2_content": "We may disclose your information if we are required to do so by law to protect and defend our rights or respond to legal process.",
+      "section_5_title": "5. Data Protection and Security",
+      "section_5_1": "5.1. Data security:",
+      "section_5_1_content": "We take appropriate measures to protect your personal data from unauthorized access, alteration, disclosure or destruction.",
+      "section_5_2": "5.2. Data storage:",
+      "section_5_2_content": "We retain your personal data for as long as is necessary to fulfill the purposes set out in this Privacy Policy, unless a longer retention period is required by law.",
+      "section_6_title": "6. Cookies and Tracking Technologies",
+      "section_6_1": "6.1. Cookies:",
+      "section_6_1_content": "We may use cookies and similar tracking technologies to improve your browsing experience. You can manage your cookie-related settings.",
+      "section_7_title": "7. Third Party Links",
+      "section_7_1": "7.1. External links:",
+      "section_7_1_content": "Our Website may contain links to external websites. We are not responsible for the privacy practices or the content of these sites.",
+      "section_8_title": "8. Children's Privacy",
+      "section_8_1": "8.1. Age restrictions:",
+      "section_8_1_content": "Our services are intended for people of all ages. We knowingly collect information from people of all ages. If you are a parent or guardian and believe that we may have inadvertently collected personal information from a child, please contact us to have it removed.",
+      "section_9_title": "9. Your rights",
+      "section_9_1": "9.1. Access and Correction:",
+      "section_9_1_content": "You have the right to access and correct your personal information. You may contact us to request access or correction.",
+      "section_9_2": "9.2. Opt-out:",
+      "section_9_2_content": "You may opt out of receiving marketing communications from us at any time.",
+      "section_10_title": "10. Changes to this Privacy Policy",
+      "section_10_1": "10.1. Policy Updates:",
+      "section_10_1_content": "We may update this Privacy Policy from time to time to reflect changes in our practices or for other operational, legal, or regulatory reasons. We will notify you of any material changes.",
+      "section_11_title": "11. Contact Us",
+      "section_11_1": "11.1. Contact us:",
+      "section_11_1_content": "If you have any questions, concerns, or requests regarding your personal information or this Privacy Policy, please contact us using the form on the \"Help\" page.",
+      "note": "This Privacy Policy was last updated on October 23, 2023 and is effective as of that date.",
+      "copyright_note": "© 2023 Copyright: Japfood.cuisine. All rights reserved."
+    },
+    "terms_and_conditions": {
+      "title": "Terms and Conditions",
+      "intro_1": "These Terms and Conditions (the \"Agreement\") are a legal agreement between you (the \"user\" or \"you\") and Japfood.cuisine (the \"us\", \"we\", or \"our\"). This Agreement sets forth the general terms and conditions for your use of the Japfood.cuisine website (the \"Website\") and any related services or content provided by Japfood.cuisine (the \"Services\").",
+      "intro_2": "By accessing or using the Website, you agree to be bound by these Terms and Conditions. If you do not agree to be bound by this Agreement, please do not use the Website.",
+      "section_1_title": "1. Privacy Policy",
+      "section_1_list": [
+        {
+          "section_1_list_item_start": "Your use of the Website is also governed by ours.",
+          "section_1_list_link": "Privacy Policy",
+          "section_1_list_item_end": ", which is incorporated by reference into this Agreement."
+        },
+        "By using the Website, you agree to the terms of the Privacy Policy."
+      ],
+      "section_2_title": "2. Use of Content",
+      "section_2_list": [
+        "The content available on the Site is for informational and personal use only.",
+        "You may not copy, modify, distribute or sell any content from this Site.",
+        "Commercial use or distribution of any content from this Site is strictly prohibited."
+      ],
+      "section_3_title": "3. Product Information",
+      "section_3_list": [
+        "The product information, including images, names, prices, weights, ingredients and descriptions provided on the Website is for informational purposes only.",
+        "We do not guarantee the accuracy, completeness or timeliness of this information."
+      ],
+      "section_4_title": "4. Categories and sorting",
+      "section_4_list": [
+        "There are four categories on the Site: Sushi, Soups, Desserts, and Beverages.",
+        "Users can search for products by name in these categories and sort products by price and weight.",
+        "We try to keep the category information up to date, but we cannot guarantee the availability of specific products."
+      ],
+      "section_5_title": "5. Communication and support",
+      "section_5_list": [
+        "Users can contact our support team via the Help page, which provides a form for inquiries.",
+        "You agree to provide accurate and up-to-date contact information.",
+        "We strive to respond to inquiries in a timely manner, but do not guarantee a response time."
+      ],
+      "section_6_title": "6. Copyright and Trademarks",
+      "section_6_list": [
+        "All content and materials on this Website, including text, graphics, logos and images, are the property of Japfood.cuisine.",
+        "You may not use our trademarks, trade names, or service marks in connection with any product or service that is not owned by us."
+      ],
+      "section_7_title": "7. Changes to the terms and conditions",
+      "section_7_list": [
+        "Japfood.cuisine reserves the right to change, modify or revise these Terms and Conditions at any time.",
+        "Your continued use of the Website following any such changes means that you accept the revised Agreement."
+      ],
+      "section_8_title": "8. Termination",
+      "section_8_list": [
+        "Japfood.cuisine may terminate or suspend your access to the Site without prior notice for any reason."
+      ],
+      "section_9_title": "9. Governing Law",
+      "section_9_list": [
+        "These Terms and Conditions shall be governed by and construed in accordance with the laws of the State of California."
+      ],
+      "note": "If you have any questions or concerns about these Terms and Conditions, please contact us via the form on the \"Help\" page for more information."
+    }
+  }
+}

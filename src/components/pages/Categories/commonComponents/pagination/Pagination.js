@@ -2,6 +2,7 @@ import React from "react";
 import PaginationItem from "./PaginationItem";
 import PaginationEllipsis from "./PaginationEllipsis";
 import styles from "./Pagination.module.css";
+import { useTranslation } from "react-i18next";
 
 const Pagination = ({
   totalItems,
@@ -9,6 +10,10 @@ const Pagination = ({
   currentPage,
   onPageChange,
 }) => {
+  const { t } = useTranslation();
+  const paginationLocalization = t("pages.categories.pagination", {
+    returnObjects: true,
+  });
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   if (totalPages < 2) {
@@ -34,7 +39,7 @@ const Pagination = ({
       items.push(
         <PaginationItem
           key="previous"
-          label="Попередня"
+          label={paginationLocalization.previous}
           onClick={() => handlePageClick(currentPage - 1)}
           className={styles.previous}
         />
@@ -123,7 +128,7 @@ const Pagination = ({
       items.push(
         <PaginationItem
           key="next"
-          label="Наступна"
+          label={paginationLocalization.next}
           onClick={() => handlePageClick(currentPage + 1)}
           className={styles.next}
         />

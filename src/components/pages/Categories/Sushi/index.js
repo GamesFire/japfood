@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import fetchSearchByName from "../commonComponents/fetchSearchByName";
+import Cookies from "js-cookie";
+import searchFoodData from "../commonComponents/searchFoodData";
+import sortFoodData from "../commonComponents/sortFoodData";
 import fetchFoodCards from "../commonComponents/fetchFoodCards";
 import fetchTotalRows from "../commonComponents/fetchTotalRows";
 import Container from "../../../container/Container";
@@ -11,87 +13,166 @@ import Pagination from "../commonComponents/pagination/Pagination";
 import Loading from "../../../loading/Loading";
 
 const SushiPage = () => {
-  const [sushiData, setSushiData] = useState([]);
-  const [sushiDataCache, setSushiDataCache] = useState(new Map());
-  const [totalItems, setTotalItems] = useState(0);
-  const [searchResults, setSearchResults] = useState([]);
-  const [isSeacrhButtonDisabled, setSearchButtonDisabled] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  const itemsPerPage = 6;
-  const category = "sushi";
-
+  const [currentLanguage, setCurrentLanguage] = useState(
+    Cookies.get("i18next") || "uk"
+  );
   const currentPage = localStorage.getItem("sushiPaginationPage")
     ? parseInt(localStorage.getItem("sushiPaginationPage"), 10)
     : 1;
 
   const [page, setPage] = useState(currentPage);
+  const [sushiData, setSushiData] = useState([]);
+  const [sushiDataCache, setSushiDataCache] = useState(new Map());
+  const [totalItems, setTotalItems] = useState(0);
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchResultsCache, setSearchResultCache] = useState(new Map());
+  const [isDisabled, setDisabled] = useState(false);
+  const [sortOption, setSortOption] = useState("");
+  const [sortedSushiData, setSortedSushiData] = useState([]);
+  const [sortedResultsData, setSortedResultsData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const handlePageChange = (page) => {
-    setPage(page);
+  const abortControllerRef = useRef(new AbortController());
+  const isInitialMount = useRef(true);
+  const intervalId = useRef(null);
+
+  const itemsPerPage = 6;
+  const category = "sushi";
+
+  const handlePageChange = (newPage) => {
+    if (!loading) {
+      setPage(newPage);
+    }
+  };
+
+  const handleSearch = (searchQuery) => {
+    if (!loading) {
+      searchFoodData(
+        category,
+        searchQuery,
+        setLoading,
+        setPage,
+        setSearchResults,
+        searchResultsCache,
+        setSearchResultCache,
+        setSortedResultsData,
+        setDisabled,
+        toast
+      );
+    }
+  };
+
+  const handleSort = (selectedSortOption) => {
+    if (!loading) {
+      setSortOption(selectedSortOption);
+      sortFoodData(
+        searchResults,
+        sushiData,
+        selectedSortOption,
+        setSortedSushiData,
+        setSortedResultsData
+      );
+    }
   };
 
   useEffect(() => {
     localStorage.setItem("sushiPaginationPage", page);
   }, [page]);
 
-  const handleSearch = async (searchQuery) => {
-    setLoading(true);
-    if (searchQuery === "") {
-      setPage(1);
-      setLoading(false);
-      setSearchResults([]);
-    } else {
-      fetchSearchByName(category, searchQuery)
-        .then((data) => {
-          setSearchResults(data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          toast.error("Неможливо знайти введену вами назву суш.", {
-            autoClose: 5000,
-            position: "bottom-center",
-            draggable: false,
-            theme: "colored",
-          });
-
-          setSearchButtonDisabled(true);
-          setTimeout(() => setSearchButtonDisabled(false), 5000);
-
-          console.error("Error searching for food cards:", error);
-          setLoading(false);
-        });
-    }
-  };
-
   useEffect(() => {
-    fetchTotalRows(category)
-      .then((data) => {
-        setTotalItems(data.totalRows);
-      })
-      .catch((error) => {
-        console.error("Error fetching sushi total items:", error);
-      });
+    if (isInitialMount.current) {
+      return;
+    }
+
+    fetchTotalRows(category).then((data) => {
+      setTotalItems(data.totalRows);
+    });
   }, []);
 
+  const fetchFoodDataBasedOnLanguage = useCallback(
+    async (language = currentLanguage) => {
+      if (isInitialMount.current) {
+        isInitialMount.current = false;
+        return;
+      }
+
+      abortControllerRef.current.abort();
+      abortControllerRef.current = new AbortController();
+
+      if (sushiDataCache.has(`${page}-${language}`)) {
+        setSushiData(sushiDataCache.get(`${page}-${language}`));
+        setLoading(false);
+      } else {
+        if (searchResults.length === 0) {
+          setLoading(true);
+          setDisabled(true);
+
+          fetchFoodCards(
+            category,
+            page,
+            language,
+            abortControllerRef.current.signal
+          )
+            .then((data) => {
+              setSushiDataCache(
+                sushiDataCache.set(`${page}-${language}`, data)
+              );
+              setSushiData(data);
+              setLoading(false);
+              setDisabled(false);
+            })
+            .catch((error) => {
+              if (error.name === "CanceledError") {
+                console.log("Previous fetchFoodData request aborted");
+
+                if (sushiDataCache.has(`${page}-${language}`)) {
+                  setSushiData(sushiDataCache.get(`${page}-${language}`));
+                  setLoading(false);
+                }
+              }
+
+              setLoading(false);
+              setDisabled(false);
+            });
+        }
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [category, page, sushiDataCache, searchResults]
+  );
+
   useEffect(() => {
-    if (sushiDataCache.has(page)) {
-      setSushiData(sushiDataCache.get(page));
-      setLoading(false);
-    } else {
+    const newLanguage = Cookies.get("i18next") || "uk";
+    if (newLanguage !== currentLanguage) {
       setLoading(true);
-      fetchFoodCards(category, page)
-        .then((data) => {
-          setSushiDataCache(sushiDataCache.set(page, data));
-          setSushiData(data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching sushi food cards:", error);
-          setLoading(false);
-        });
+      fetchFoodDataBasedOnLanguage(newLanguage);
+      setCurrentLanguage(newLanguage);
     }
-  }, [page, sushiDataCache]);
+
+    intervalId.current = setInterval(() => {
+      const newLanguage = Cookies.get("i18next") || "uk";
+      if (newLanguage !== currentLanguage) {
+        fetchFoodDataBasedOnLanguage(newLanguage);
+        setCurrentLanguage(newLanguage);
+      }
+    }, 100);
+
+    return () => clearInterval(intervalId.current);
+  }, [currentLanguage, fetchFoodDataBasedOnLanguage]);
+
+  useEffect(() => {
+    fetchFoodDataBasedOnLanguage();
+  }, [fetchFoodDataBasedOnLanguage]);
+
+  useEffect(() => {
+    sortFoodData(
+      searchResults,
+      sushiData,
+      sortOption,
+      setSortedSushiData,
+      setSortedResultsData
+    );
+  }, [searchResults, sushiData, sortOption]);
 
   useEffect(() => {
     window.addEventListener("beforeunload", () => {
@@ -102,6 +183,8 @@ const SushiPage = () => {
       window.removeEventListener("beforeunload", () => {
         localStorage.removeItem("sushiPaginationPage");
       });
+
+      abortControllerRef.current.abort();
     };
   }, []);
 
@@ -111,7 +194,8 @@ const SushiPage = () => {
         <Container>
           <FilterPanel
             onSearch={handleSearch}
-            isSeacrhButtonDisabled={isSeacrhButtonDisabled}
+            onSort={handleSort}
+            isDisabled={isDisabled}
           />
           {loading ? (
             <Loading />
@@ -119,11 +203,22 @@ const SushiPage = () => {
             <FoodList
               foodData={
                 searchResults.length > 0
-                  ? searchResults.slice(
-                      (page - 1) * itemsPerPage,
-                      page * itemsPerPage
-                    )
-                  : sushiData
+                  ? sortOption === "" || sortOption === "no-sort"
+                    ? searchResults.slice(
+                        (page - 1) * itemsPerPage,
+                        page * itemsPerPage
+                      )
+                    : sortedResultsData.length > 0
+                    ? sortedResultsData.slice(
+                        (page - 1) * itemsPerPage,
+                        page * itemsPerPage
+                      )
+                    : sortedSushiData.length > 0
+                    ? sortedSushiData
+                    : sushiData
+                  : sortOption === "" || sortOption === "no-sort"
+                  ? sushiData
+                  : sortedSushiData
               }
             />
           )}
