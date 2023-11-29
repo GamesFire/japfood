@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import fetchSearchByName from "../commonComponents/fetchSearchByName";
+import Cookies from "js-cookie";
+import searchFoodData from "../commonComponents/searchFoodData";
+import sortFoodData from "../commonComponents/sortFoodData";
 import fetchFoodCards from "../commonComponents/fetchFoodCards";
 import fetchTotalRows from "../commonComponents/fetchTotalRows";
 import Container from "../../../container/Container";
@@ -11,86 +13,191 @@ import Pagination from "../commonComponents/pagination/Pagination";
 import Loading from "../../../loading/Loading";
 
 const DrinksPage = () => {
-  const [drinksData, setDrinksData] = useState([]);
-  const [drinksDataCache, setDrinksDataCache] = useState(new Map());
-  const [totalItems, setTotalItems] = useState(0);
-  const [searchResults, setSearchResults] = useState([]);
-  const [isSeacrhButtonDisabled, setSearchButtonDisabled] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  const category = "drinks";
-  const itemsPerPage = 6;
+  const [currentLanguage, setCurrentLanguage] = useState(
+    Cookies.get("i18next") || "uk"
+  );
   const currentPage = localStorage.getItem("drinksPaginationPage")
     ? parseInt(localStorage.getItem("drinksPaginationPage"), 10)
     : 1;
 
   const [page, setPage] = useState(currentPage);
+  const [drinksData, setDrinksData] = useState([]);
+  const [drinksDataCache, setDrinksDataCache] = useState(new Map());
+  const [totalItems, setTotalItems] = useState(0);
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchResultsCache, setSearchResultCache] = useState(new Map());
+  const [isDisabled, setDisabled] = useState(false);
+  const [sortOption, setSortOption] = useState("");
+  const [sortedDrinksData, setSortedDrinksData] = useState([]);
+  const [sortedResultsData, setSortedResultsData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const handlePageChange = (page) => {
-    setPage(page);
+  const abortControllerRef = useRef(new AbortController());
+  const isInitialMount = useRef(true);
+  const intervalId = useRef(null);
+
+  const itemsPerPage = 6;
+  const category = "drinks";
+
+  useEffect(() => {
+    if (loading) {
+      localStorage.setItem("isDataLoading", "true");
+      window.dispatchEvent(new Event("storage"));
+    } else {
+      localStorage.setItem("isDataLoading", "false");
+      window.dispatchEvent(new Event("storage"));
+    }
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      localStorage.removeItem("isDataLoading");
+      window.dispatchEvent(new Event("storage"));
+    };
+  }, [loading]);
+
+  const handlePageChange = (newPage) => {
+    if (!loading) {
+      setPage(newPage);
+    }
+  };
+
+  const handleSearch = (searchQuery) => {
+    if (!loading) {
+      searchFoodData(
+        category,
+        searchQuery,
+        setLoading,
+        setPage,
+        setSearchResults,
+        searchResultsCache,
+        setSearchResultCache,
+        setSortedResultsData,
+        setDisabled,
+        toast
+      );
+    }
+  };
+
+  const handleSort = (selectedSortOption) => {
+    if (!loading) {
+      setSortOption(selectedSortOption);
+      sortFoodData(
+        searchResults,
+        drinksData,
+        selectedSortOption,
+        setSortedDrinksData,
+        setSortedResultsData
+      );
+    }
   };
 
   useEffect(() => {
     localStorage.setItem("drinksPaginationPage", page);
-  }, [page]);
+    localStorage.setItem("isSearchBarActive", searchResults.length !== 0);
 
-  const handleSearch = async (searchQuery) => {
-    setLoading(true);
-    if (searchQuery === "") {
-      setPage(1);
-      setLoading(false);
-      setSearchResults([]);
-    } else {
-      fetchSearchByName(category, searchQuery)
-        .then((data) => {
-          setSearchResults(data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          toast.error("Неможливо знайти введену вами назву напою.", {
-            autoClose: 5000,
-            position: "bottom-center",
-            draggable: false,
-            theme: "colored",
-          });
+    window.dispatchEvent(new Event("storage"));
 
-          setSearchButtonDisabled(true);
-          setTimeout(() => setSearchButtonDisabled(false), 5000);
-
-          console.error("Error searching for food cards:", error);
-          setLoading(false);
-        });
-    }
-  };
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      localStorage.removeItem("isSearchBarActive");
+      window.dispatchEvent(new Event("storage"));
+    };
+  }, [page, searchResults.length]);
 
   useEffect(() => {
-    fetchTotalRows(category)
-      .then((data) => {
-        setTotalItems(data.totalRows);
-      })
-      .catch((error) => {
-        console.error("Error fetching drinks total items:", error);
-      });
+    if (isInitialMount.current) {
+      return;
+    }
+
+    fetchTotalRows(category).then((data) => {
+      setTotalItems(data.totalRows);
+    });
   }, []);
 
+  const fetchFoodDataBasedOnLanguage = useCallback(
+    async (language = currentLanguage) => {
+      if (isInitialMount.current) {
+        isInitialMount.current = false;
+        return;
+      }
+
+      abortControllerRef.current.abort();
+      abortControllerRef.current = new AbortController();
+
+      if (drinksDataCache.has(`${page}-${language}`)) {
+        setDrinksData(drinksDataCache.get(`${page}-${language}`));
+        setLoading(false);
+      } else {
+        if (searchResults.length === 0) {
+          setLoading(true);
+          setDisabled(true);
+
+          fetchFoodCards(
+            category,
+            page,
+            language,
+            abortControllerRef.current.signal
+          )
+            .then((data) => {
+              setDrinksDataCache(
+                drinksDataCache.set(`${page}-${language}`, data)
+              );
+              setDrinksData(data);
+              setLoading(false);
+              setDisabled(false);
+            })
+            .catch((error) => {
+              if (error.name === "CanceledError") {
+                console.log("Previous fetchFoodData request aborted");
+
+                if (drinksDataCache.has(`${page}-${language}`)) {
+                  setDrinksData(drinksDataCache.get(`${page}-${language}`));
+                  setLoading(false);
+                }
+              }
+
+              setLoading(false);
+              setDisabled(false);
+            });
+        }
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [category, page, drinksDataCache, searchResults]
+  );
+
   useEffect(() => {
-    if (drinksDataCache.has(page)) {
-      setDrinksData(drinksDataCache.get(page));
-      setLoading(false);
-    } else {
+    const newLanguage = Cookies.get("i18next") || "uk";
+    if (newLanguage !== currentLanguage) {
       setLoading(true);
-      fetchFoodCards(category, page)
-        .then((data) => {
-          setDrinksDataCache(drinksDataCache.set(page, data));
-          setDrinksData(data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching drinks food cards:", error);
-          setLoading(false);
-        });
+      fetchFoodDataBasedOnLanguage(newLanguage);
+      setCurrentLanguage(newLanguage);
     }
-  }, [page, drinksDataCache]);
+
+    intervalId.current = setInterval(() => {
+      const newLanguage = Cookies.get("i18next") || "uk";
+      if (newLanguage !== currentLanguage) {
+        fetchFoodDataBasedOnLanguage(newLanguage);
+        setCurrentLanguage(newLanguage);
+      }
+    }, 100);
+
+    return () => clearInterval(intervalId.current);
+  }, [currentLanguage, fetchFoodDataBasedOnLanguage]);
+
+  useEffect(() => {
+    fetchFoodDataBasedOnLanguage();
+  }, [fetchFoodDataBasedOnLanguage]);
+
+  useEffect(() => {
+    sortFoodData(
+      searchResults,
+      drinksData,
+      sortOption,
+      setSortedDrinksData,
+      setSortedResultsData
+    );
+  }, [searchResults, drinksData, sortOption]);
 
   useEffect(() => {
     window.addEventListener("beforeunload", () => {
@@ -101,8 +208,19 @@ const DrinksPage = () => {
       window.removeEventListener("beforeunload", () => {
         localStorage.removeItem("drinksPaginationPage");
       });
+
+      abortControllerRef.current.abort();
     };
   }, []);
+
+  const handleBeforeUnload = () => {
+    localStorage.removeItem("isSearchBarActive");
+    localStorage.removeItem("isDataLoading");
+
+    window.dispatchEvent(new Event("storage"));
+  };
+
+  window.addEventListener("beforeunload", handleBeforeUnload);
 
   return (
     <main>
@@ -110,7 +228,8 @@ const DrinksPage = () => {
         <Container>
           <FilterPanel
             onSearch={handleSearch}
-            isSeacrhButtonDisabled={isSeacrhButtonDisabled}
+            onSort={handleSort}
+            isDisabled={isDisabled}
           />
           {loading ? (
             <Loading />
@@ -118,11 +237,22 @@ const DrinksPage = () => {
             <FoodList
               foodData={
                 searchResults.length > 0
-                  ? searchResults.slice(
-                      (page - 1) * itemsPerPage,
-                      page * itemsPerPage
-                    )
-                  : drinksData
+                  ? sortOption === "" || sortOption === "no-sort"
+                    ? searchResults.slice(
+                        (page - 1) * itemsPerPage,
+                        page * itemsPerPage
+                      )
+                    : sortedResultsData.length > 0
+                    ? sortedResultsData.slice(
+                        (page - 1) * itemsPerPage,
+                        page * itemsPerPage
+                      )
+                    : sortedDrinksData.length > 0
+                    ? sortedDrinksData
+                    : drinksData
+                  : sortOption === "" || sortOption === "no-sort"
+                  ? drinksData
+                  : sortedDrinksData
               }
             />
           )}

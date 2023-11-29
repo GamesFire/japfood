@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import styles from "./PrivacyPolicy.module.css";
+import styles from "./index.module.css";
 import Container from "../../container/Container";
 
-const PrivacyPolicy = () => {
+const PrivacyPolicyPage = () => {
   const { t } = useTranslation();
   const privacyPolicy = t("pages.privacy_policy", { returnObjects: true });
 
@@ -139,4 +139,4 @@ const PrivacyPolicy = () => {
   );
 };
 
-export default PrivacyPolicy;
+export default PrivacyPolicyPage;

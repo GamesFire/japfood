@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import LanguageOption from "./LanguageOption";
 import LanguageMenuDropdown from "./LanguageMenuDropdown";
 import Cookies from "js-cookie";
@@ -13,27 +13,59 @@ import EnglishFlagIcon from "../../../../assets/images/icons/usa-flag.png";
 const ChangeLanguageMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [canChangeLanguage, setCanChangeLanguage] = useState(true);
+  const [isDataLoading, setIsDataLoading] = useState(false); // Added state for data loading
   const { t, i18n } = useTranslation();
   const changeLanguageMenuLocalization = t("header.change_language_menu", {
     returnObjects: true,
   });
 
   const currentLanguage = Cookies.get("i18next");
+  const isSearchBarActiveRef = useRef();
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      isSearchBarActiveRef.current =
+        localStorage.getItem("isSearchBarActive") === "true";
+      setCanChangeLanguage(!isSearchBarActiveRef.current);
+    };
+
+    handleStorageChange();
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleDataLoadingChange = () => {
+      setIsDataLoading(localStorage.getItem("isDataLoading") === "true");
+    };
+
+    handleDataLoadingChange();
+
+    window.addEventListener("storage", handleDataLoadingChange);
+
+    return () => {
+      window.removeEventListener("storage", handleDataLoadingChange);
+    };
+  }, []);
 
   const handleMenuOpen = () => {
-    if (canChangeLanguage) {
+    if (canChangeLanguage && !isDataLoading) {
       setIsMenuOpen(true);
     }
   };
 
   const handleMenuClose = () => {
-    if (canChangeLanguage) {
+    if (canChangeLanguage && !isDataLoading) {
       setIsMenuOpen(false);
     }
   };
 
   const handleLanguageClick = (language) => {
-    if (canChangeLanguage) {
+    if (canChangeLanguage && !isDataLoading) {
       i18n.changeLanguage(language);
       setCanChangeLanguage(false);
 
@@ -55,19 +87,25 @@ const ChangeLanguageMenu = () => {
       className={styles.languageMenu}
       onMouseEnter={handleMenuOpen}
       onMouseLeave={handleMenuClose}
+      title={
+        isSearchBarActiveRef.current
+          ? changeLanguageMenuLocalization.tooltip_text
+          : ""
+      }
     >
       <button className={styles.languageButton}>
         <span
           className={`${styles.languageButtonText} ${
-            !canChangeLanguage ? styles.disabled : ""
+            !canChangeLanguage || isDataLoading ? styles.disabled : ""
           }`}
         >
           {changeLanguageMenuLocalization.choose_language}
         </span>
+
         <FontAwesomeIcon
           icon={faCaretDown}
           className={`${isMenuOpen ? styles.arrowUp : styles.arrowDown} 
-          ${!canChangeLanguage ? styles.disabled : ""}`}
+          ${!canChangeLanguage || isDataLoading ? styles.disabled : ""}`}
         />
       </button>
       <LanguageMenuDropdown isOpen={isMenuOpen}>

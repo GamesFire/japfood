@@ -1,0 +1,7 @@
+.settingsPanel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: hidden;
+  margin-bottom: 52px;
+}

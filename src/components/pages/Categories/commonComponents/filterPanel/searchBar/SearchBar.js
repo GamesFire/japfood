@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import styles from "./SearchBar.module.css";
 import { ThemeContext } from "../../../../../../Theme";
 import { useTranslation } from "react-i18next";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 import LoupeDark from "../../../../../../assets/images/icons/dark/loupe-dark.svg";
 import LoupeLight from "../../../../../../assets/images/icons/light/loupe-light.svg";
@@ -27,6 +29,11 @@ const SearchBar = ({ onSearch, isDisabled }) => {
     onSearch(searchQuery);
   };
 
+  const handleClear = () => {
+    setSearchQuery("");
+    onSearch("");
+  };
+
   return (
     <div
       className={`${styles.searchContainer} ${
@@ -44,6 +51,15 @@ const SearchBar = ({ onSearch, isDisabled }) => {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
+      {searchQuery && (
+        <button
+          type="button"
+          className={styles.clearButton}
+          onClick={handleClear}
+        >
+          <FontAwesomeIcon icon={faTimes} className={styles.clearIcon} />
+        </button>
+      )}
       <button
         type="button"
         className={styles.searchButton}

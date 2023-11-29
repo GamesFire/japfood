@@ -8,8 +8,9 @@ import SoupsPage from "./components/pages/Categories/Soups";
 import DessertsPage from "./components/pages/Categories/Desserts";
 import DrinksPage from "./components/pages/Categories/Drinks";
 import HelpPage from "./components/pages/Help";
-import PrivacyPolicy from "./components/pages/PrivacyPolicy/PrivacyPolicy";
-import TermsAndConditions from "./components/pages/TermsAndConditions/TermsAndConditions";
+import PrivacyPolicyPage from "./components/pages/PrivacyPolicy";
+import TermsAndConditionsPage from "./components/pages/TermsAndConditions";
+import AdminPage from "./components/pages/Admin";
 import NoPage from "./components/pages/NoPage";
 import { ThemeContext } from "./Theme";
 
@@ -35,8 +36,12 @@ function App() {
           <Route path="category-desserts" element={<DessertsPage />} />
           <Route path="category-drinks" element={<DrinksPage />} />
           <Route path="help" element={<HelpPage />} />
-          <Route path="privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="terms-and-conditions" element={<TermsAndConditions />} />
+          <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route
+            path="terms-and-conditions"
+            element={<TermsAndConditionsPage />}
+          />
+          <Route path="admin" element={<AdminPage />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

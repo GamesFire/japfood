@@ -1,0 +1,288 @@
+.foodCard {
+  position: relative;
+  width: 360px;
+  height: 500px;
+  perspective: 1000px;
+  user-select: none;
+  filter: blur(0);
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  transition: transform .6s, box-shadow .3s;
+  box-shadow: 4px 2px -2px rgba(0, 0, 0, 0.1);
+}
+
+.cardContainer {
+  width: 100%;
+  height: 100%;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  transition: transform .6s;
+}
+
+.flipped .cardContainer {
+  transform: rotateY(180deg);
+}
+
+.side {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow .3s;
+}
+
+.flipped .side {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.front {
+  background-color: var(--bg-primary);
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.imageContainer {
+  position: relative;
+  width: 360px;
+  height: 50%;
+  overflow: hidden;
+}
+
+.darkBackground {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.contentContainer {
+  height: 50%;
+  margin-block: 20px;
+  padding-inline: 20px;
+}
+
+.name {
+  font-family: 'Noto Sans Medium', sans-serif;
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  text-align: center;
+  margin-block-start: 0;
+  margin-block-end: 16px;
+}
+
+.weight,
+.averagePrice,
+.ingredients {
+  margin-block: 0;
+}
+
+.weight,
+.averagePrice {
+  margin-bottom: 12px;
+}
+
+.label {
+  color: var(--color-entan);
+}
+
+.descriptionContainer {
+  width: 100%;
+  height: 50%;
+  overflow: hidden auto;
+  background-color: var(--color-momo);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding-inline: 20px;
+  padding-block: 4px;
+}
+
+.noScroll {
+  overflow-y: hidden;
+}
+
+.description {
+  margin: 0;
+}
+
+.editing {
+  height: 660px !important;
+}
+
+.nameEditing,
+.weightEditing,
+.averagePriceEditing,
+.ingredientsEditing,
+.descriptionEditing {
+  width: 100px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-primary);
+  background-color: var(--color-entan);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  resize: none;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.nameEditing {
+  width: 200px;
+  font-family: 'Noto Sans Medium', sans-serif;
+  text-align: center;
+}
+
+.ingredientsEditing,
+.descriptionEditing {
+  width: 100%;
+}
+
+.ingredientsEditing {
+  height: 160px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.descriptionEditing {
+  height: 220px;
+}
+
+.imageEditing {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.imageEditingLabel {
+  position: absolute;
+  left: 45%;
+  top: 45%;
+  color: var(--text-primary);
+  text-align: center;
+  cursor: pointer;
+}
+
+.imageEditingLabelIcon {
+  font-size: 40px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.weightEditing::-webkit-outer-spin-button,
+.averagePriceEditing::-webkit-outer-spin-button,
+.weightEditing::-webkit-inner-spin-button,
+.averagePriceEditing::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.flipCardButton,
+.editingButton,
+.deleteButton,
+.saveEditingButton,
+.cancelEditingButton {
+  font-family: 'Noto Sans Medium', sans-serif;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-primary);
+  background-color: var(--color-imayoh);
+  margin-right: 8px;
+  margin-bottom: 20px;
+  padding-block: 8px;
+  padding-inline: 12px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0px 2px 2px 1px rgba(8, 8, 8, 0.15);
+  transition: background-color .2s;
+}
+
+.flipCardButton:hover,
+.editingButton:hover,
+.deleteButton:hover,
+.saveEditingButton:hover,
+.cancelEditingButton:hover {
+  background-color: var(--color-entan);
+}
+
+.editingButton:disabled,
+.editingButton[disabled],
+.deleteButton:disabled,
+.deleteButton[disabled] {
+  background-color: var(--color-nibi);
+  cursor: not-allowed;
+}
+
+@media screen and (min-width: 2000px) {
+  .foodCard {
+    width: 520px;
+    height: 1200px;
+  }
+
+  .imageContainer {
+    width: 520px;
+  }
+
+  @media screen and (min-width: 2300px) {
+    .foodCard {
+      width: 600px;
+    }
+
+    .imageContainer {
+      width: 600px;
+    }
+  }
+
+  .contentContainer {
+    margin-block: 40px;
+    padding-inline: 40px;
+  }
+
+  .name {
+    font-size: 36px;
+    line-height: 1.5;
+    margin-block-end: 32px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  @media screen and (max-width: 425px) {
+    .foodCard {
+      width: 288px;
+      height: 600px;
+    }
+
+    .imageContainer {
+      width: 288px;
+    }
+  }
+}

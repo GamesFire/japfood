@@ -13,7 +13,8 @@
     "change_language_menu": {
       "choose_language": "Choose language",
       "ukrainian": "Українська",
-      "english": "English"
+      "english": "English",
+      "tooltip_text": "Clear the search by name field to change the language"
     }
   },
   "footer": {
@@ -58,6 +59,7 @@
         }
       },
       "food_list": {
+        "error_text": "Food cards in this category are not available at this time. Please try again later.",
         "food_card": {
           "weight_per_piece": "The weight per piece:",
           "grams": "g",

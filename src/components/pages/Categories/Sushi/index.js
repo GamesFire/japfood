@@ -39,6 +39,22 @@ const SushiPage = () => {
   const itemsPerPage = 6;
   const category = "sushi";
 
+  useEffect(() => {
+    if (loading) {
+      localStorage.setItem("isDataLoading", "true");
+      window.dispatchEvent(new Event("storage"));
+    } else {
+      localStorage.setItem("isDataLoading", "false");
+      window.dispatchEvent(new Event("storage"));
+    }
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      localStorage.removeItem("isDataLoading");
+      window.dispatchEvent(new Event("storage"));
+    };
+  }, [loading]);
+
   const handlePageChange = (newPage) => {
     if (!loading) {
       setPage(newPage);
@@ -77,7 +93,16 @@ const SushiPage = () => {
 
   useEffect(() => {
     localStorage.setItem("sushiPaginationPage", page);
-  }, [page]);
+    localStorage.setItem("isSearchBarActive", searchResults.length !== 0);
+
+    window.dispatchEvent(new Event("storage"));
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      localStorage.removeItem("isSearchBarActive");
+      window.dispatchEvent(new Event("storage"));
+    };
+  }, [page, searchResults.length]);
 
   useEffect(() => {
     if (isInitialMount.current) {
@@ -117,7 +142,9 @@ const SushiPage = () => {
               setSushiDataCache(
                 sushiDataCache.set(`${page}-${language}`, data)
               );
+
               setSushiData(data);
+
               setLoading(false);
               setDisabled(false);
             })
@@ -127,6 +154,7 @@ const SushiPage = () => {
 
                 if (sushiDataCache.has(`${page}-${language}`)) {
                   setSushiData(sushiDataCache.get(`${page}-${language}`));
+
                   setLoading(false);
                 }
               }
@@ -187,6 +215,15 @@ const SushiPage = () => {
       abortControllerRef.current.abort();
     };
   }, []);
+
+  const handleBeforeUnload = () => {
+    localStorage.removeItem("isSearchBarActive");
+    localStorage.removeItem("isDataLoading");
+
+    window.dispatchEvent(new Event("storage"));
+  };
+
+  window.addEventListener("beforeunload", handleBeforeUnload);
 
   return (
     <main>

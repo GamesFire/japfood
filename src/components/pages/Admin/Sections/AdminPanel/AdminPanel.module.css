@@ -1,0 +1,8 @@
+.title {
+  margin-inline: auto;
+  margin-block: 100px;
+}
+
+.adminPanelContent {
+  position: relative;
+}

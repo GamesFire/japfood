@@ -64,7 +64,7 @@ const ContactUs = () => {
             },
           }
         );
-        console.log(response);
+
         if (response.data.status === "success") {
           notifySuccess(`${contactUsLocalization.notify_success}`);
 

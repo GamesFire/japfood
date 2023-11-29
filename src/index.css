@@ -59,6 +59,24 @@ a {
   margin-block-end: 72px;
 }
 
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--color-shironezumi);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-imayoh);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-jinzamomi);
+}
+
 @media screen and (min-width: 2000px) {
   html {
     font-size: 32px;

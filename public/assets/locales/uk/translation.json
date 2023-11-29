@@ -13,7 +13,8 @@
     "change_language_menu": {
       "choose_language": "Оберіть мову",
       "ukrainian": "Українська",
-      "english": "English"
+      "english": "English",
+      "tooltip_text": "Очистіть поле пошуку за назвою, щоб змінити мову"
     }
   },
   "footer": {
@@ -58,6 +59,7 @@
         }
       },
       "food_list": {
+        "error_text": "Картки їжі в цій категорії зараз недоступні. Будь ласка, спробуйте пізніше.",
         "food_card": {
           "weight_per_piece": "Вага за шматок:",
           "grams": "г",

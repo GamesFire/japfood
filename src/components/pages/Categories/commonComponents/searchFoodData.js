@@ -31,12 +31,14 @@ const searchFoodData = async (
     setDisabled(false);
   } else {
     try {
-      if (searchResultsCache.has(searchQuery)) {
+      if (searchResultsCache.has(`${searchQuery}-${currentLanguage}`)) {
         if (searchResultsCache.size <= 6) {
           setPage(1);
         }
 
-        setSearchResults(searchResultsCache.get(searchQuery));
+        setSearchResults(
+          searchResultsCache.get(`${searchQuery}-${currentLanguage}`)
+        );
         setLoading(false);
         setDisabled(false);
       } else {
@@ -45,7 +47,10 @@ const searchFoodData = async (
           searchQuery,
           currentLanguage
         );
-        setSearchResultCache(searchResultsCache.set(searchQuery, data));
+
+        setSearchResultCache(
+          searchResultsCache.set(`${searchQuery}-${currentLanguage}`, data)
+        );
 
         if (data.length <= 6) {
           setPage(1);

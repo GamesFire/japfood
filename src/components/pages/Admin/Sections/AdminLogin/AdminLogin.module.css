@@ -1,0 +1,165 @@
+.adminLogin {
+  width: 100%;
+  margin-inline: auto;
+  margin-top: 72px;
+}
+
+.subtitle {
+  margin-block-end: 28px;
+}
+
+.text {
+  text-align: center;
+  margin: 0;
+  margin-bottom: 72px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+  width: 50%;
+  background-color: var(--color-momo);
+  border-radius: 5px;
+  margin-inline: auto;
+}
+
+.formHeader {
+  font-family: 'Noto Sans Medium', sans-serif;
+  font-size: 24px;
+  font-weight: unset;
+  text-align: center;
+  margin-block: 32px;
+  margin-inline: auto;
+}
+
+.formGroup {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-inline: 56px;
+}
+
+.login,
+.password {
+  width: 100%;
+  font-family: 'Noto Sans Regular', sans-serif;
+  font-size: 20px;
+  color: var(--text-primary);
+  background-color: var(--color-momo);
+  border: none;
+  border-bottom: 1px solid var(--color-azuki);
+  outline: none;
+  resize: none;
+  padding-block-start: 32px;
+  padding-block-end: 8px;
+  padding-inline: 0;
+  transition: border-color .2s;
+}
+
+.login:focus,
+.password:focus {
+  border-bottom-color: var(--color-blue);
+}
+
+.login:disabled,
+.login[disabled],
+.password:disabled,
+.password[disabled] {
+  color: var(--color-nibi);
+  cursor: not-allowed;
+}
+
+.label {
+  position: absolute;
+  top: 0;
+  left: 56px;
+  font-size: 20px;
+  color: var(--color-nibi);
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: transform .2s, font-size .2s;
+}
+
+.focused {
+  font-size: 16px;
+  transform: translateY(0);
+}
+
+.submitButton {
+  width: 168px;
+  font-family: 'Noto Sans Medium', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--color-imayoh);
+  margin-left: 54px;
+  margin-bottom: 32px;
+  padding-block: 16px;
+  padding-inline: 44px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0px 2px 2px 1px rgba(8, 8, 8, 0.15);
+  transition: background-color .2s;
+}
+
+.submitButton:hover {
+  background-color: var(--color-entan);
+}
+
+.submitButton:disabled,
+.submitButton[disabled] {
+  background-color: var(--color-nibi);
+  cursor: not-allowed;
+}
+
+@media screen and (min-width: 2000px) {
+  .adminLogin {
+    display: flex;
+    align-items: center;
+    height: 70vh;
+  }
+
+  .form {
+    row-gap: 52px;
+  }
+
+  .formHeader {
+    font-size: 40px;
+  }
+
+  .login,
+  .password {
+    font-size: 36px;
+  }
+
+  .label {
+    font-size: 36px;
+  }
+
+  .focused {
+    font-size: 24px;
+  }
+
+  .submitButton {
+    width: 300px;
+    font-size: 36px;
+    line-height: 1.5;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .form {
+    width: 100%;
+  }
+
+  .formHeader {
+    font-size: 20px;
+  }
+
+  .formGroup {
+    padding-inline: 32px;
+  }
+}

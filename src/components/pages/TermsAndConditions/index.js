@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import styles from "./TermsAndConditions.module.css";
+import styles from "./index.module.css";
 import Container from "../../container/Container";
 
-const TermsAndConditions = () => {
+const TermsAndConditionsPage = () => {
   const { t } = useTranslation();
   const termsAndConditions = t("pages.terms_and_conditions", {
     returnObjects: true,
@@ -130,4 +130,4 @@ const TermsAndConditions = () => {
   );
 };
 
-export default TermsAndConditions;
+export default TermsAndConditionsPage;
