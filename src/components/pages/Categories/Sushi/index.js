@@ -105,14 +105,25 @@ const SushiPage = () => {
   }, [page, searchResults.length]);
 
   useEffect(() => {
+    const fetchTotalRowsAbortController = new AbortController();
+    const { signal } = fetchTotalRowsAbortController;
+
     if (isInitialMount.current) {
-      return;
+      return () => {
+        fetchTotalRowsAbortController.abort();
+      };
     }
 
-    fetchTotalRows(category).then((data) => {
+    const handleNewData = (data) => {
       setTotalItems(data.totalRows);
-    });
-  }, []);
+    };
+
+    fetchTotalRows(category, handleNewData, signal);
+
+    return () => {
+      fetchTotalRowsAbortController.abort();
+    };
+  }, [category]);
 
   const fetchFoodDataBasedOnLanguage = useCallback(
     async (language = currentLanguage) => {

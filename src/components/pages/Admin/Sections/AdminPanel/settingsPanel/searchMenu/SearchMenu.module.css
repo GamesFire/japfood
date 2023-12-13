@@ -1,0 +1,240 @@
+.searchMenu {
+  width: 240px;
+  height: auto;
+  user-select: none;
+  overflow-x: hidden;
+  background-color: var(--color-imayoh);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.menuTitle {
+  font-family: 'Noto Sans Medium', sans-serif;
+  font-size: 20px;
+  font-weight: unset;
+  margin-block-start: 0;
+  margin-block-end: 8px;
+  padding: 4px;
+}
+
+.menuList {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: 'Noto Sans Medium', sans-serif;
+  font-size: 20px;
+  overflow: hidden;
+}
+
+.menuListItem {
+  padding: 4px;
+}
+
+.menuListItem:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+
+.searchInput {
+  max-width: 196px;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  padding-block: 10px;
+  padding-inline-start: 16px;
+  padding-inline-end: 20px;
+  border: solid 1px var(--color-imayoh);
+  border-radius: 20px;
+  outline: none;
+}
+
+.searchInput:hover:not(.active) {
+  border-color: #212121;
+}
+
+.active {
+  border-color: var(--color-blue);
+}
+
+.searchInput::placeholder {
+  color: var(--color-nibi);
+}
+
+/* Internet Explorer 10-11 */
+.searchInput:-ms-input-placeholder {
+  color: var(--color-nibi);
+}
+
+/* Microsoft Edge */
+.searchInput::-ms-input-placeholder {
+  color: var(--color-nibi);
+}
+
+.searchButton {
+  display: block;
+  width: 100%;
+  font-family: 'Noto Sans Medium', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--color-imayoh);
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  margin-top: 12px;
+  margin-inline: auto;
+  padding-block: 10px;
+  padding-inline: 20px;
+  cursor: pointer;
+  box-shadow: 0px 2px 2px 1px rgba(8, 8, 8, 0.15);
+  transition: background-color .2s;
+}
+
+.searchButton:hover {
+  background-color: var(--color-entan);
+}
+
+.clearButton {
+  position: relative;
+  left: -20px;
+  color: var(--color-primary);
+  background-color: transparent;
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.clearIcon {
+  font-family: 'Noto Sans Medium', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.iconContainer {
+  display: inline-block;
+  margin-right: 12px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
+
+.searchButtonText {
+  font-family: 'Noto Sans Medium', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.searchButton:disabled,
+.seacrhButton[disabled] {
+  background-color: var(--color-nibi);
+  cursor: not-allowed;
+}
+
+@media screen and (min-width: 2000px) {
+  .searchMenu {
+    width: 400px;
+  }
+
+  .menuTitle {
+    font-size: 36px;
+    margin-block-end: 16px;
+  }
+
+  .searchContainer {
+    width: 1000px;
+  }
+
+  .searchInput {
+    max-width: 344px;
+    font-size: 24px;
+    line-height: 1.4;
+    padding-block: 20px;
+    padding-inline-start: 52px;
+    padding-inline-end: 32px;
+  }
+
+  .searchButton {
+    padding-block: 20px;
+    padding-inline: 52px;
+  }
+
+  .clearButton {
+    left: -32px;
+  }
+
+  .clearIcon {
+    font-size: 32px;
+    line-height: 1.4;
+  }
+
+  .iconContainer {
+    margin-right: 16px;
+  }
+
+  .icon {
+    width: 28px;
+    height: 28px;
+    vertical-align: baseline;
+  }
+
+  .searchButtonText {
+    font-size: 32px;
+    line-height: 1.4;
+  }
+}
+
+@media screen and (max-width: 1439px) {
+  .searchButton {
+    padding-inline: 28px;
+  }
+
+  @media screen and (max-width: 800px) {
+    .searchButton {
+      padding-inline: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .searchMenu {
+    width: 100%;
+  }
+
+  .searchContainer {
+    flex-direction: column;
+    width: 100%;
+    max-width: 360px;
+    margin-bottom: 60px;
+  }
+
+  .searchInput {
+    max-width: 240px;
+    width: 100%;
+    padding-inline-start: 12px;
+    padding-inline-end: 8px;
+  }
+
+  @media screen and (min-width: 424px) {
+    .searchInput {
+      max-width: 340px;
+    }
+  }
+
+  .searchButton {
+    text-align: center;
+    padding-block: 12px;
+    padding-inline: 32px;
+    border-top-left-radius: 0;
+  }
+
+  .clearButton {
+    margin-right: 0;
+    margin-bottom: 12px;
+  }
+}

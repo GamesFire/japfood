@@ -1,5 +1,5 @@
-.sectionMenu {
-  width: 240px;
+.sortMenu {
+  width: 280px;
   height: auto;
   user-select: none;
   overflow-x: hidden;
@@ -22,30 +22,45 @@
   flex-direction: column;
   justify-content: space-between;
   font-family: 'Noto Sans Medium', sans-serif;
-  font-size: 20px;
+  font-size: 16px;
+  line-height: 1.5;
+  overflow: hidden;
 }
 
 .menuListItem {
-  border-radius: 10px;
-  padding: 4px;
-  cursor: pointer;
-  transition: background-color .2s;
-}
-
-.menuListItem.active {
-  background-color: var(--color-entan);
-}
-
-.menuListItem:not(.active):hover {
-  background-color: var(--color-entan);
+  padding-block: 8px;
+  padding-inline: 4px;
 }
 
 .menuListItem:not(:last-child) {
   margin-bottom: 8px;
 }
 
+.sortingOption {
+  margin: 0;
+  margin-right: 4px;
+  padding: 0;
+  border: none;
+}
+
+.sortingOption,
+.sortingLabel {
+  cursor: pointer;
+}
+
+.sortingOption:checked+.sortingLabel::before {
+  background-color: var(--color-imayoh);
+  border-color: var(--color-imayoh);
+}
+
+.sortingOption:disabled,
+.sortingOption[disabled] {
+  background-color: var(--color-nibi);
+  cursor: not-allowed;
+}
+
 @media screen and (min-width: 2000px) {
-  .sectionMenu {
+  .sortMenu {
     width: 400px;
   }
 
@@ -55,12 +70,12 @@
   }
 
   .menuList {
-    font-size: 32px;
+    font-size: 24px;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .sectionMenu {
+  .sortMenu {
     width: 100%;
   }
 }

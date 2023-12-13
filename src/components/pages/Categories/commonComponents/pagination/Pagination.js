@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PaginationItem from "./PaginationItem";
 import PaginationEllipsis from "./PaginationEllipsis";
 import styles from "./Pagination.module.css";
@@ -8,20 +8,35 @@ const Pagination = ({
   totalItems,
   itemsPerPage,
   currentPage,
+  addedNewFoodCard,
   onPageChange,
 }) => {
   const { t } = useTranslation();
   const paginationLocalization = t("pages.categories.pagination", {
     returnObjects: true,
   });
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  let totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  useEffect(() => {
+    if (addedNewFoodCard) {
+      onPageChange(totalPages);
+    }
+  }, [addedNewFoodCard, onPageChange, totalPages]);
+
+  useEffect(() => {
+    if (totalPages < currentPage) {
+      onPageChange(totalPages);
+    }
+  }, [totalPages, currentPage, onPageChange]);
 
   if (totalPages < 2) {
     return null;
   }
 
   const handlePageClick = (page) => {
-    onPageChange(page);
+    if (!addedNewFoodCard) {
+      onPageChange(page);
+    }
   };
 
   const handleEllipsisClick = (direction) => {

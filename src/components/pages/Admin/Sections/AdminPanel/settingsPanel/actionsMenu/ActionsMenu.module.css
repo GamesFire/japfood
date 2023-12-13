@@ -1,4 +1,4 @@
-.sectionMenu {
+.actionsMenu {
   width: 240px;
   height: auto;
   user-select: none;
@@ -26,26 +26,44 @@
 }
 
 .menuListItem {
-  border-radius: 10px;
   padding: 4px;
   cursor: pointer;
-  transition: background-color .2s;
-}
-
-.menuListItem.active {
-  background-color: var(--color-entan);
-}
-
-.menuListItem:not(.active):hover {
-  background-color: var(--color-entan);
 }
 
 .menuListItem:not(:last-child) {
   margin-bottom: 8px;
 }
 
+.actionButton {
+  flex-grow: 1;
+  width: 100%;
+  font-family: 'Noto Sans Medium', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-primary);
+  background-color: var(--color-imayoh);
+  margin-bottom: 8px;
+  padding-block: 16px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0px 2px 2px 1px rgba(8, 8, 8, 0.15);
+  transition: background-color .2s;
+}
+
+.actionButton:hover {
+  background-color: var(--color-entan);
+}
+
+.actionButton:disabled,
+.actionButton[disabled] {
+  background-color: var(--color-nibi);
+  cursor: not-allowed;
+}
+
 @media screen and (min-width: 2000px) {
-  .sectionMenu {
+  .actionsMenu {
     width: 400px;
   }
 
@@ -54,13 +72,13 @@
     margin-block-end: 16px;
   }
 
-  .menuList {
-    font-size: 32px;
+  .actionButton {
+    font-size: 24px;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .sectionMenu {
+  .actionsMenu {
     width: 100%;
   }
 }

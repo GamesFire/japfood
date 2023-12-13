@@ -69,7 +69,7 @@ const SearchBar = ({ onSearch, isDisabled }) => {
         <span className={styles.iconContainer}>
           <img
             src={isDarkTheme ? LoupeLight : LoupeDark}
-            alt={`${isDarkTheme ? LoupeLight : LoupeDark} Icon`}
+            alt={`${isDarkTheme ? "LoupeLight" : "LoupeDark"} Icon`}
             className={styles.icon}
           />
         </span>

@@ -1,7 +1,7 @@
-.foodCard {
+.addNewFoodCard {
   position: relative;
   width: 360px;
-  height: 500px;
+  height: 660px;
   perspective: 1000px;
   user-select: none;
   filter: blur(0);
@@ -55,16 +55,6 @@
   width: 360px;
   height: 50%;
   overflow: hidden;
-}
-
-.darkBackground {
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .image {
@@ -149,6 +139,18 @@
   padding: 4px;
 }
 
+.nameEditing::placeholder,
+.weightEditing::placeholder,
+.averagePriceEditing::placeholder,
+.ingredientsEditing::placeholder,
+.descriptionEditing::placeholder {
+  font-family: 'Noto Sans Regular', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-shironezumi);
+  text-align: center;
+}
+
 .nameEditing {
   width: 200px;
   font-family: 'Noto Sans Medium', sans-serif;
@@ -205,8 +207,6 @@
 }
 
 .flipCardButton,
-.editingButton,
-.deleteButton,
 .saveEditingButton,
 .cancelEditingButton {
   font-family: 'Noto Sans Medium', sans-serif;
@@ -227,23 +227,21 @@
 }
 
 .flipCardButton:hover,
-.editingButton:hover,
-.deleteButton:hover,
 .saveEditingButton:hover,
 .cancelEditingButton:hover {
   background-color: var(--color-entan);
 }
 
-.editingButton:disabled,
-.editingButton[disabled],
-.deleteButton:disabled,
-.deleteButton[disabled] {
+.saveEditingButton:disabled,
+.saveEditingButton[disabled],
+.cancelEditingButton:disabled,
+.cancelEditingButton[disabled] {
   background-color: var(--color-nibi);
   cursor: not-allowed;
 }
 
 @media screen and (min-width: 2000px) {
-  .foodCard {
+  .addNewFoodCard {
     width: 520px;
     height: 1200px;
   }
@@ -252,13 +250,26 @@
     width: 520px;
   }
 
+  .flipCardButton,
+  .saveEditingButton,
+  .cancelEditingButton {
+    font-size: 20px;
+    line-height: 1.5;
+  }
+
   @media screen and (min-width: 2300px) {
-    .foodCard {
+    .addNewFoodCard {
       width: 600px;
     }
 
     .imageContainer {
       width: 600px;
+    }
+
+    .flipCardButton,
+    .saveEditingButton,
+    .cancelEditingButton {
+      font-size: 24px;
     }
   }
 
@@ -272,17 +283,54 @@
     line-height: 1.5;
     margin-block-end: 32px;
   }
+
+  .nameEditing,
+  .weightEditing,
+  .averagePriceEditing,
+  .ingredientsEditing,
+  .descriptionEditing {
+    width: 160px;
+    font-size: 32px;
+    line-height: 1.5;
+  }
+
+  .nameEditing {
+    width: 240px;
+  }
+
+  .ingredientsEditing,
+  .descriptionEditing {
+    width: 100%;
+  }
+
+  .descriptionEditing {
+    height: 500px;
+  }
+
+  .nameEditing::placeholder,
+  .weightEditing::placeholder,
+  .averagePriceEditing::placeholder,
+  .ingredientsEditing::placeholder,
+  .descriptionEditing::placeholder {
+    font-size: 32px;
+  }
 }
 
 @media screen and (max-width: 767px) {
   @media screen and (max-width: 425px) {
-    .foodCard {
+    .addNewFoodCard {
       width: 288px;
-      height: 600px;
+      height: 740px;
     }
 
     .imageContainer {
       width: 288px;
+    }
+
+    .flipCardButton,
+    .saveEditingButton,
+    .cancelEditingButton {
+      padding-inline: 8px;
     }
   }
 }

@@ -22,6 +22,8 @@ const ChangeLanguageMenu = () => {
   const currentLanguage = Cookies.get("i18next");
   const isSearchBarActiveRef = useRef();
 
+  const isOnAdminPage = window.location.pathname.includes("/admin");
+
   useEffect(() => {
     const handleStorageChange = () => {
       isSearchBarActiveRef.current =
@@ -53,13 +55,13 @@ const ChangeLanguageMenu = () => {
   }, []);
 
   const handleMenuOpen = () => {
-    if (canChangeLanguage && !isDataLoading) {
+    if (!isOnAdminPage && canChangeLanguage && !isDataLoading) {
       setIsMenuOpen(true);
     }
   };
 
   const handleMenuClose = () => {
-    if (canChangeLanguage && !isDataLoading) {
+    if (!isOnAdminPage && canChangeLanguage && !isDataLoading) {
       setIsMenuOpen(false);
     }
   };
@@ -96,7 +98,9 @@ const ChangeLanguageMenu = () => {
       <button className={styles.languageButton}>
         <span
           className={`${styles.languageButtonText} ${
-            !canChangeLanguage || isDataLoading ? styles.disabled : ""
+            !canChangeLanguage || isDataLoading || isOnAdminPage
+              ? styles.disabled
+              : ""
           }`}
         >
           {changeLanguageMenuLocalization.choose_language}
@@ -105,7 +109,11 @@ const ChangeLanguageMenu = () => {
         <FontAwesomeIcon
           icon={faCaretDown}
           className={`${isMenuOpen ? styles.arrowUp : styles.arrowDown} 
-          ${!canChangeLanguage || isDataLoading ? styles.disabled : ""}`}
+          ${
+            !canChangeLanguage || isDataLoading || isOnAdminPage
+              ? styles.disabled
+              : ""
+          }`}
         />
       </button>
       <LanguageMenuDropdown isOpen={isMenuOpen}>

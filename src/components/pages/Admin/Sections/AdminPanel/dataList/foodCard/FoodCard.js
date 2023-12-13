@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import styles from "./FoodCard.module.css";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import fetchUpdateData from "../../fetches/fetchUpdateData";
+import fetchDeleteData from "../../fetches/fetchDeleteData";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
 const FoodCard = ({
-  currentCategory,
-  updateFoodCardInState,
-  deleteFoodCardFromState,
+  currentSection,
+  updateDataInState,
+  deleteDataFromState,
   isEditing,
   isEditingAnyCard,
   onEditClick,
   onSaveOrCancel,
+  toast,
   id,
   name,
   imageName,
@@ -27,6 +27,7 @@ const FoodCard = ({
   const [activeSide, setActiveSide] = useState("front");
   const [imageSrc, setImageSrc] = useState(null);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [isButtonsDisabled, setButtonsDisabled] = useState(false);
   const [editedValues, setEditedValues] = useState({
     id: id,
     name: name,
@@ -55,59 +56,25 @@ const FoodCard = ({
   };
 
   const handleSave = () => {
-    axios
-      .post(
-        "http://localhost:80/dev/react/japfood/update_food_card.php",
-        {
-          currentCategory: currentCategory,
-          editedValues: editedValues,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then(() => {
-        notifySuccess("Дані успішно збережено!");
+    fetchUpdateData(
+      currentSection,
+      editedValues,
+      notifySuccess,
+      notifyError,
+      updateDataInState
+    );
 
-        updateFoodCardInState(editedValues);
-      })
-      .catch((error) => {
-        notifyError(
-          "Помилка при збереженні даних! Ознайомитися детально з помилкою можна в консолі браузера."
-        );
-
-        console.error("Error saving data:", error);
-      })
-      .finally(() => {
-        onSaveOrCancel();
-      });
+    onSaveOrCancel();
   };
 
   const handleDelete = () => {
-    const isConfirmed = window.confirm(
-      "Ви дійсно хочете видалити поточну картку їжі?"
+    fetchDeleteData(
+      currentSection,
+      id,
+      notifySuccess,
+      notifyError,
+      deleteDataFromState
     );
-
-    if (isConfirmed) {
-      axios
-        .post("http://localhost:80/dev/react/japfood/delete_food_card.php", {
-          currentCategory: currentCategory,
-          deletedCardId: id,
-        })
-        .then(() => {
-          notifySuccess("Поточну картку їжі успішно видалено!");
-          deleteFoodCardFromState(id);
-        })
-        .catch((error) => {
-          notifyError(
-            "Помилка видалення поточної картки їжі! Ознайомитися детально з помилкою можна в консолі браузера."
-          );
-
-          console.error("Error deleting data:", error);
-        });
-    }
   };
 
   const handleCancel = () => {
@@ -179,6 +146,12 @@ const FoodCard = ({
       closeOnClick: false,
       pauseOnHover: false,
       theme: "colored",
+      onOpen: () => {
+        setButtonsDisabled(true);
+      },
+      onClose: () => {
+        setButtonsDisabled(false);
+      },
     });
   };
 
@@ -191,6 +164,12 @@ const FoodCard = ({
       closeOnClick: false,
       pauseOnHover: false,
       theme: "colored",
+      onOpen: () => {
+        setButtonsDisabled(true);
+      },
+      onClose: () => {
+        setButtonsDisabled(false);
+      },
     });
   };
 
@@ -204,6 +183,7 @@ const FoodCard = ({
             value={editedValues.name}
             className={styles.nameEditing}
             onChange={handleInputChange}
+            autoComplete="off"
           />
         ) : (
           name
@@ -218,6 +198,7 @@ const FoodCard = ({
             value={editedValues.weight}
             className={styles.weightEditing}
             onChange={handleInputChange}
+            autoComplete="off"
           />
         ) : (
           weight
@@ -233,6 +214,7 @@ const FoodCard = ({
             value={editedValues.averagePrice}
             className={styles.averagePriceEditing}
             onChange={handleInputChange}
+            autoComplete="off"
           />
         ) : (
           averagePrice
@@ -247,6 +229,7 @@ const FoodCard = ({
             value={editedValues.ingredients}
             className={styles.ingredientsEditing}
             onChange={handleInputChange}
+            autoComplete="off"
           />
         ) : (
           ingredients
@@ -298,14 +281,14 @@ const FoodCard = ({
                   <button
                     className={styles.editingButton}
                     onClick={handleEdit}
-                    disabled={isEditingAnyCard}
+                    disabled={isEditingAnyCard || isButtonsDisabled}
                   >
                     Редагувати
                   </button>
                   <button
                     className={styles.deleteButton}
                     onClick={handleDelete}
-                    disabled={isEditingAnyCard}
+                    disabled={isEditingAnyCard || isButtonsDisabled}
                   >
                     Видалити
                   </button>
@@ -346,6 +329,7 @@ const FoodCard = ({
                       activeSide === "back" ? "" : styles.noScroll
                     }`}
                     onChange={handleInputChange}
+                    autoComplete="off"
                   />
                 ) : (
                   description
@@ -362,14 +346,14 @@ const FoodCard = ({
                   <button
                     className={styles.editingButton}
                     onClick={handleEdit}
-                    disabled={isEditingAnyCard}
+                    disabled={isEditingAnyCard || isButtonsDisabled}
                   >
                     Редагувати
                   </button>
                   <button
                     className={styles.deleteButton}
                     onClick={handleDelete}
-                    disabled={isEditingAnyCard}
+                    disabled={isEditingAnyCard || isButtonsDisabled}
                   >
                     Видалити
                   </button>
@@ -395,7 +379,6 @@ const FoodCard = ({
           </div>
         </div>
       </div>
-      <ToastContainer limit={1} />
     </li>
   );
 };
