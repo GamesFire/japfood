@@ -1,6 +1,6 @@
 # Japfood
 
-![Japfood](./public/logo512.png)
+![Japfood](./src/assets/images/Japfood.png)
 
 ## Overview
 
