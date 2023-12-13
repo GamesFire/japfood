@@ -11,6 +11,9 @@ The Japfood is an online platform designed to introduce users to various Japanes
 - **Categorized Food Cards:** Explore a variety of Japanese dishes sorted by categories.
 - **Detailed Information:** View detailed information, including images, titles, average prices, weights, ingredients, and descriptions.
 - **Search and Sort:** Use the search and sorting features to find specific dishes easily.
+- **Admin Area:** Manipulate food cards by adding, deleting, and editing items within the admin area.
+- **Multilingual Support:** The site supports two languages, Ukrainian (default) and English.
+- **Theme Change:** Switch between light and dark themes for a personalized user experience.
 - **Help Page:** Access a dedicated "Help" page with frequently asked questions (FAQ) and a feedback form.
 - **Privacy Policy and Terms:** Read through the privacy policy and terms and conditions for a better understanding of the application's usage.
 
@@ -42,6 +45,13 @@ To run the application locally, follow these steps:
    ```
 
 4. Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
+
+## Admin Features
+
+To access the admin area, use the following credentials:
+
+- **Username:** admin
+- **Password:** bgfad12!ds%&dsaDA34
 
 ## Contributing
 
