@@ -1,4 +1,3 @@
-// AdminPage.js
 import React, { useState } from "react";
 import AdminLogin from "./Sections/AdminLogin/AdminLogin";
 import AdminPanel from "./Sections/AdminPanel/AdminPanel";

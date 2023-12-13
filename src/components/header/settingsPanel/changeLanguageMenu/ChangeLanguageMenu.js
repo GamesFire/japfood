@@ -13,7 +13,7 @@ import EnglishFlagIcon from "../../../../assets/images/icons/usa-flag.png";
 const ChangeLanguageMenu = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [canChangeLanguage, setCanChangeLanguage] = useState(true);
-  const [isDataLoading, setIsDataLoading] = useState(false); // Added state for data loading
+  const [isDataLoading, setIsDataLoading] = useState(false);
   const { t, i18n } = useTranslation();
   const changeLanguageMenuLocalization = t("header.change_language_menu", {
     returnObjects: true,
