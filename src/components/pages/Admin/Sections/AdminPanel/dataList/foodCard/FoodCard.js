@@ -39,6 +39,11 @@ const FoodCard = ({
     description: description,
   });
 
+  const validateUkrainianText = (text) =>
+    /^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ',.;""\-(){}[\] ]+$/u.test(text);
+  const validateNonNegativeNumber = (number) => /^[+]?\d+$/u.test(number);
+  const validateSmallNumber = (number) => /^[+]?\d{1,9}$/u.test(number);
+
   useEffect(() => {
     if (image) {
       const decodedImage = `data:image/jpeg;base64,${image}`;
@@ -56,6 +61,20 @@ const FoodCard = ({
   };
 
   const handleSave = () => {
+    if (
+      !validateUkrainianText(editedValues.name) ||
+      !validateUkrainianText(editedValues.imageName) ||
+      !validateNonNegativeNumber(editedValues.weight) ||
+      !validateSmallNumber(editedValues.averagePrice) ||
+      !validateUkrainianText(editedValues.ingredients) ||
+      !validateUkrainianText(editedValues.description)
+    ) {
+      notifyError(
+        "Будь ласка, заповніть усі поля коректно, використовуючи тільки українські літери та допустимі значення для числових полів."
+      );
+      return;
+    }
+
     fetchUpdateData(
       currentSection,
       editedValues,
@@ -93,29 +112,34 @@ const FoodCard = ({
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    let validatedValue = value;
+
+    if (name === "name" || name === "imageName" || name === "ingredients") {
+      validatedValue = value.replace(
+        /[^а-щА-ЩЬьЮюЯяЇїІіЄєҐґ',.;""\-(){}[\] ]/gu,
+        ""
+      );
+    } else if (name === "weight" || name === "averagePrice") {
+      const numericRegex = /^[+]?\d{1,9}$/u;
+      validatedValue = numericRegex.test(value) ? value : "";
+
+      const minValue = 0;
+      const maxValue = 1000000;
+      validatedValue = Math.min(
+        Math.max(parseInt(validatedValue, 10), minValue),
+        maxValue
+      ).toString();
+    } else if (name === "description") {
+      validatedValue = value.replace(
+        /[^а-щА-ЩЬьЮюЯяЇїІіЄєҐґ0-9',.;""\-(){}[\] ]/gu,
+        ""
+      );
+    }
+
     setEditedValues((prevValues) => ({
       ...prevValues,
-      [name]: value,
+      [name]: validatedValue,
     }));
-  };
-
-  const promptForImageName = (callback) => {
-    let newImageName = "";
-    while (true) {
-      newImageName = window.prompt("Введіть назву зображення:", imageName);
-
-      const isValidName =
-        newImageName && /^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ']+$/u.test(newImageName);
-
-      if (isValidName) {
-        callback(newImageName);
-        break;
-      } else {
-        window.alert(
-          "Введіть коректну назву зображення, використовуючи тільки українські літери."
-        );
-      }
-    }
   };
 
   const handleImageChange = (e) => {
@@ -126,14 +150,36 @@ const FoodCard = ({
         setImageSrc(reader.result);
 
         promptForImageName((newImageName) => {
+          const imageBase64 = reader.result.split(",")[1];
+
           setEditedValues((prevValues) => ({
             ...prevValues,
             imageName: newImageName,
-            image: reader.result,
+            image: imageBase64,
           }));
         });
       };
       reader.readAsDataURL(file);
+    }
+  };
+
+  const promptForImageName = (callback) => {
+    let newImageName = "";
+    while (true) {
+      newImageName = window.prompt("Введіть назву зображення:", "");
+
+      const isValidName =
+        newImageName &&
+        /^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ',.;""\-(){}[\] ]+$/u.test(newImageName);
+
+      if (isValidName) {
+        callback(newImageName);
+        break;
+      } else {
+        window.alert(
+          "Введіть коректну назву зображення, використовуючи тільки українські літери."
+        );
+      }
     }
   };
 

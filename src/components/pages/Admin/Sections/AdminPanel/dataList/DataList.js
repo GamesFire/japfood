@@ -31,7 +31,7 @@ const DataList = ({
     );
   }
 
-  const addNewDataInstate = (newFoodCardValues) => {
+  const addNewDataInState = (newFoodCardValues) => {
     setDataList((prevDataList) => [...prevDataList, newFoodCardValues]);
   };
 
@@ -107,7 +107,7 @@ const DataList = ({
             <AddNewFoodCard
               key={"new-card"}
               currentSection={currentSection}
-              addNewDataInstate={addNewDataInstate}
+              addNewDataInState={addNewDataInState}
               onRemoveNewFoodCardClick={onRemoveNewFoodCardClick}
               toast={toast}
             />

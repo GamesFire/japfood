@@ -7,7 +7,7 @@ import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
 const AddNewFoodCard = ({
   currentSection,
-  addNewFoodCardInState,
+  addNewDataInState,
   onRemoveNewFoodCardClick,
   toast,
 }) => {
@@ -27,10 +27,10 @@ const AddNewFoodCard = ({
 
   useEffect(() => {
     setImageSrc(null);
-  }, [addNewFoodCardInState]);
+  }, [addNewDataInState]);
 
   const validateUkrainianText = (text) =>
-    /^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ']+$/u.test(text);
+    /^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ',.;""\-(){}[\] ]+$/u.test(text);
   const validateNonNegativeNumber = (number) => /^[+]?\d+$/u.test(number);
   const validateSmallNumber = (number) => /^[+]?\d{1,9}$/u.test(number);
 
@@ -72,7 +72,7 @@ const AddNewFoodCard = ({
 
         const newFoodCardData = response.data.newCard;
 
-        addNewFoodCardInState(newFoodCardData);
+        addNewDataInState(newFoodCardData);
       })
       .catch((error) => {
         notifyError(
@@ -116,7 +116,10 @@ const AddNewFoodCard = ({
     let validatedValue = value;
 
     if (name === "name" || name === "imageName" || name === "ingredients") {
-      validatedValue = value.replace(/[^а-щА-ЩЬьЮюЯяЇїІіЄєҐґ']/gu, "");
+      validatedValue = value.replace(
+        /[^а-щА-ЩЬьЮюЯяЇїІіЄєҐґ',.;""\-(){}[\] ]/gu,
+        ""
+      );
     } else if (name === "weight" || name === "averagePrice") {
       const numericRegex = /^[+]?\d{1,9}$/u;
       validatedValue = numericRegex.test(value) ? value : "";
@@ -128,7 +131,10 @@ const AddNewFoodCard = ({
         maxValue
       ).toString();
     } else if (name === "description") {
-      validatedValue = value.replace(/[^а-щА-ЩЬьЮюЯяЇїІіЄєҐґ0-9']/gu, "");
+      validatedValue = value.replace(
+        /[^а-щА-ЩЬьЮюЯяЇїІіЄєҐґ0-9',.;""\-(){}[\] ]/gu,
+        ""
+      );
     }
 
     setNewValues((prevValues) => ({
@@ -164,7 +170,8 @@ const AddNewFoodCard = ({
       newImageName = window.prompt("Введіть назву зображення:", "");
 
       const isValidName =
-        newImageName && /^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ']+$/u.test(newImageName);
+        newImageName &&
+        /^[а-щА-ЩЬьЮюЯяЇїІіЄєҐґ',.;""\-(){}[\] ]+$/u.test(newImageName);
 
       if (isValidName) {
         callback(newImageName);
