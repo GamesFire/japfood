@@ -50,7 +50,7 @@ const AdminLogin = ({ onLogin }) => {
         setSubmitDisabled(true);
 
         const response = await axios.post(
-          "http://localhost:80/dev/react/japfood/admin_login_form.php",
+          "http://localhost:80/dev/react/japfood/admin_login/admin_login_form.php",
           new URLSearchParams(formData),
           {
             headers: {

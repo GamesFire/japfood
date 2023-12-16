@@ -3,7 +3,7 @@ import axios from "axios";
 const fetchAdminSearch = async (section, searchQuery) => {
   try {
     const response = await axios.get(
-      "http://localhost:80/dev/react/japfood/get_admin_search.php",
+      "http://localhost:80/dev/react/japfood/queries/get_admin_search.php",
       {
         params: {
           currentSection: section,

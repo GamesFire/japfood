@@ -9,7 +9,7 @@ const fetchUpdateData = async (
 ) => {
   try {
     await axios.post(
-      "http://localhost:80/dev/react/japfood/update_data.php",
+      "http://localhost:80/dev/react/japfood/actions/update_data.php",
       {
         currentSection: currentSection,
         editedValues: editedValues,

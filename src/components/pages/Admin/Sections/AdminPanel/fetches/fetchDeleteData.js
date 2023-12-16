@@ -14,7 +14,7 @@ const fetchDeleteData = async (
 
     if (isConfirmed) {
       await axios.post(
-        "http://localhost:80/dev/react/japfood/delete_data.php",
+        "http://localhost:80/dev/react/japfood/actions/delete_data.php",
         {
           currentSection: currentSection,
           deletedCardId: id,

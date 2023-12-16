@@ -6,7 +6,7 @@ const fetchTotalRows = async (category, onNewData, signal) => {
   const poll = async (lastUpdate = 0) => {
     try {
       const response = await axios.get(
-        "http://localhost:80/dev/react/japfood/get_total_rows.php",
+        "http://localhost:80/dev/react/japfood/queries/get_total_rows.php",
         {
           params: {
             category,

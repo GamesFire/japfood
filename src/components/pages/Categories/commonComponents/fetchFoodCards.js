@@ -3,7 +3,7 @@ import axios from "axios";
 const fetchFoodCards = async (category, page, currentLanguage, signal) => {
   try {
     const response = await axios.get(
-      "http://localhost:80/dev/react/japfood/get_data.php",
+      "http://localhost:80/dev/react/japfood/queries/get_data.php",
       {
         params: { category, page, currentLanguage },
         signal,

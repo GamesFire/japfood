@@ -56,7 +56,7 @@ const ContactUs = () => {
         setSubmitDisabled(true);
 
         const response = await axios.post(
-          "http://localhost:80/dev/react/japfood/submit_form.php",
+          "http://localhost:80/dev/react/japfood/actions/submit_form.php",
           new URLSearchParams(formData),
           {
             headers: {

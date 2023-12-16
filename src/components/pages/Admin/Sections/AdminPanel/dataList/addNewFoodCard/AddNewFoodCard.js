@@ -56,7 +56,7 @@ const AddNewFoodCard = ({
 
     axios
       .post(
-        "http://localhost:80/dev/react/japfood/add_new_food_card.php",
+        "http://localhost:80/dev/react/japfood/actions/add_new_food_card.php",
         {
           currentSection: currentSection,
           newValues: newValues,

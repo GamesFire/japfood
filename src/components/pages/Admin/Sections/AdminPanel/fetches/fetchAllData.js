@@ -3,7 +3,7 @@ import axios from "axios";
 const fetchAllData = async (category, signal) => {
   try {
     const response = await axios.get(
-      "http://localhost:80/dev/react/japfood/get_all_data.php",
+      "http://localhost:80/dev/react/japfood/queries/get_all_data.php",
       {
         params: { category },
         signal,

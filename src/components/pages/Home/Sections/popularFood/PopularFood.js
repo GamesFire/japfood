@@ -51,7 +51,7 @@ const PopularFood = () => {
           setLoading(true);
 
           const response = await axios.get(
-            "http://localhost:80/dev/react/japfood/get_popular_food_data.php",
+            "http://localhost:80/dev/react/japfood/queries/get_popular_food_data.php",
             {
               params: { currentLanguage: language },
               signal: abortControllerRef.current.signal,
