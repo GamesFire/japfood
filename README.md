@@ -6,6 +6,16 @@
 
 The Japfood is an online platform designed to introduce users to various Japanese cuisines through informative food cards categorized by type. This React application provides users with details such as images, titles, average prices, weights, ingredients, and descriptions for each food card.
 
+## Static DEMO Version
+
+Check out the static DEMO version of the site on Netlify: [Japfood Netlify DEMO](https://warm-mousse-ab68f8.netlify.app/).
+
+This version includes all features except server-side and database interactions.
+
+## Server Side (japfood-server)
+
+Explore the server-side logic of Japfood in the [japfood-server repository](https://github.com/GamesFire/japfood-server.git). This repository handles various server-side operations, including database interactions, authentication, and more.
+
 ## Features
 
 - **Categorized Food Cards:** Explore a variety of Japanese dishes sorted by categories.
