@@ -304,7 +304,7 @@ const AdminPanel = () => {
   return (
     <section className={`section ${styles.adminPanel}`}>
       <Container>
-        <h1 className={`title ${styles.title}`}>Адмінпанель веб-сайту</h1>
+        <h1 className={`title ${styles.title}`}>Адмінпанель вебсайту</h1>
         <div className={styles.adminPanelContent}>
           <SettingsPanel
             selectedSection={selectedSection}
